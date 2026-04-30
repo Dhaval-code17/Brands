@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière — Handcrafted Candles</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --warm: #c8a97e;
+    --dark: #1a1410;
+    --blush: #e8d5c4;
+    --gold: #b8945a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--cream); color: var(--dark); font-family: 'Raleway', sans-serif; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 24px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(245,240,232,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(200,169,126,0.3); }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; letter-spacing: 4px; color: var(--gold); }
+  .nav-links a { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--dark); text-decoration: none; margin-left: 40px; opacity: 0.7; transition: opacity 0.3s; }
+  .nav-links a:hover { opacity: 1; }
+
+  /* HERO */
+  .hero { height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 120px 80px; background: var(--dark); }
+  .hero-left h1 { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; color: var(--cream); line-height: 1.1; }
+  .hero-left h1 em { font-style: italic; color: var(--warm); }
+  .hero-left p { font-size: 13px; letter-spacing: 2px; color: rgba(245,240,232,0.6); margin-top: 30px; line-height: 1.8; max-width: 320px; }
+  .hero-cta { margin-top: 50px; display: inline-block; border: 1px solid var(--warm); color: var(--warm); padding: 14px 40px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; transition: all 0.4s; }
+  .hero-cta:hover { background: var(--warm); color: var(--dark); }
+  .hero-right { position: relative; overflow: hidden; background: var(--blush); }
+  .hero-right img { width: 100%; height: 100%; object-fit: cover; filter: sepia(20%); transition: transform 8s ease; }
+  .hero-right:hover img { transform: scale(1.05); }
+  .flame-overlay { position: absolute; bottom: 60px; right: 60px; width: 120px; height: 120px; background: radial-gradient(circle, rgba(200,169,126,0.8) 0%, rgba(184,148,90,0.4) 50%, transparent 70%); border-radius: 50%; animation: pulse 3s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:0.8} 50%{transform:scale(1.2);opacity:1} }
+
+  /* MARQUEE */
+  .marquee-strip { background: var(--gold); padding: 16px 0; overflow: hidden; }
+  .marquee-inner { display: flex; gap: 60px; animation: scroll 20s linear infinite; white-space: nowrap; }
+  .marquee-inner span { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--cream); }
+  @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* COLLECTION */
+  .collection { padding: 120px 80px; }
+  .section-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; line-height: 1.2; margin-bottom: 80px; }
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .product-card { position: relative; overflow: hidden; }
+  .product-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; transition: transform 0.6s ease; filter: sepia(10%); }
+  .product-card:hover .product-img { transform: scale(1.05); }
+  .product-info { padding: 20px 0; }
+  .product-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; }
+  .product-note { font-size: 11px; letter-spacing: 2px; color: rgba(26,20,16,0.5); margin-top: 6px; }
+  .product-price { font-size: 14px; color: var(--gold); margin-top: 10px; letter-spacing: 1px; }
+  .sold-out { position: absolute; top: 20px; left: 20px; background: var(--dark); color: var(--cream); font-size: 9px; letter-spacing: 3px; padding: 6px 12px; text-transform: uppercase; }
+
+  /* RITUAL */
+  .ritual { background: var(--dark); padding: 120px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .ritual-video { position: relative; aspect-ratio: 9/16; max-width: 360px; overflow: hidden; border-radius: 2px; }
+  .ritual-video video { width: 100%; height: 100%; object-fit: cover; }
+  .ritual-video::after { content: '▶ WATCH THE RITUAL'; position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: var(--cream); font-size: 10px; letter-spacing: 3px; border: 1px solid rgba(255,255,255,0.4); padding: 10px 20px; cursor: pointer; }
+  .ritual-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: var(--cream); line-height: 1.2; margin-bottom: 30px; }
+  .ritual-text h2 em { color: var(--warm); font-style: italic; }
+  .ritual-text p { color: rgba(245,240,232,0.6); line-height: 2; font-size: 14px; }
+  .ritual-steps { margin-top: 50px; }
+  .step { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(200,169,126,0.15); }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; color: var(--gold); opacity: 0.4; line-height: 1; flex-shrink: 0; }
+  .step-text h4 { color: var(--cream); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .step-text p { color: rgba(245,240,232,0.5); font-size: 13px; line-height: 1.7; }
+
+  /* SCENTS */
+  .scents { padding: 120px 80px; background: var(--blush); }
+  .scents-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 60px; }
+  .scent-card { padding: 40px 30px; background: var(--cream); transition: background 0.3s; cursor: default; }
+  .scent-card:hover { background: var(--gold); }
+  .scent-card:hover * { color: var(--cream) !important; }
+  .scent-icon { font-size: 32px; margin-bottom: 20px; }
+  .scent-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; margin-bottom: 10px; }
+  .scent-desc { font-size: 12px; line-height: 1.8; color: rgba(26,20,16,0.6); letter-spacing: 0.5px; }
+
+  /* TESTIMONIALS */
+  .testimonials { padding: 120px 80px; text-align: center; }
+  .testimonials blockquote { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; font-style: italic; line-height: 1.5; max-width: 800px; margin: 0 auto; color: var(--dark); }
+  .testimonials cite { display: block; margin-top: 30px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-style: normal; }
+
+  /* NEWSLETTER */
+  .newsletter { background: var(--dark); padding: 80px; text-align: center; }
+  .newsletter h3 { font-family: 'Cormorant Garamond', serif; font-size: 42px; color: var(--cream); margin-bottom: 20px; }
+  .newsletter p { color: rgba(245,240,232,0.5); font-size: 13px; letter-spacing: 1px; margin-bottom: 40px; }
+  .newsletter-form { display: flex; max-width: 440px; margin: 0 auto; }
+  .newsletter-form input { flex: 1; background: transparent; border: 1px solid rgba(200,169,126,0.4); border-right: none; padding: 14px 20px; color: var(--cream); font-size: 12px; letter-spacing: 1px; outline: none; }
+  .newsletter-form input::placeholder { color: rgba(245,240,232,0.3); }
+  .newsletter-form button { background: var(--gold); border: none; color: var(--dark); padding: 14px 30px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
+
+  /* FOOTER */
+  footer { padding: 60px 80px; background: var(--dark); border-top: 1px solid rgba(200,169,126,0.1); display: flex; justify-content: space-between; align-items: center; }
+  footer .logo { font-size: 22px; }
+  footer p { color: rgba(245,240,232,0.3); font-size: 11px; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">LUMIÈRE</div>
+  <div class="nav-links">
+    <a href="#">Collection</a>
+    <a href="#">About</a>
+    <a href="#">Rituals</a>
+    <a href="#">Journal</a>
+    <a href="#">Shop</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <h1>Born<br>from <em>silence</em><br>& flame</h1>
+    <p>Small-batch artisan candles, hand-poured in Lyon. Each fragrance tells a story of the French countryside.</p>
+    <a href="#" class="hero-cta">Explore Collection</a>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=80" alt="Lumière candles">
+    <div class="flame-overlay"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>✦ Hand-poured in small batches</span><span>✦ Natural soy wax</span><span>✦ Cotton wicks</span><span>✦ 50+ hour burn time</span><span>✦ Sustainable packaging</span><span>✦ No artificial dyes</span>
+    <span>✦ Hand-poured in small batches</span><span>✦ Natural soy wax</span><span>✦ Cotton wicks</span><span>✦ 50+ hour burn time</span><span>✦ Sustainable packaging</span><span>✦ No artificial dyes</span>
+  </div>
+</div>
+
+<!-- COLLECTION -->
+<section class="collection">
+  <div class="section-label">Our Collection</div>
+  <h2 class="section-title">Curated fragrances<br>for every <em style="font-family:'Cormorant Garamond',serif;font-style:italic;">season</em></h2>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="sold-out">New</div>
+      <img class="product-img" src="https://images.unsplash.com/photo-1608181831718-c9fca7db35b5?w=600&q=80" alt="Amber Rose">
+      <div class="product-info">
+        <div class="product-name">Amber Rose</div>
+        <div class="product-note">Rose · Sandalwood · Musk</div>
+        <div class="product-price">€34</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1560785496-3c9d27877182?w=600&q=80" alt="Forest Morning">
+      <div class="product-info">
+        <div class="product-name">Forest Morning</div>
+        <div class="product-note">Cedar · Pine · Vetiver</div>
+        <div class="product-price">€38</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80" alt="Vanilla Soleil">
+      <div class="product-info">
+        <div class="product-name">Vanilla Soleil</div>
+        <div class="product-note">Vanilla · Tonka · Honey</div>
+        <div class="product-price">€32</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RITUAL -->
+<section class="ritual">
+  <div class="ritual-video">
+    <img src="https://images.unsplash.com/photo-1603905756280-88e8b4a00ede?w=600&q=80" alt="Candle ritual" style="width:100%;height:100%;object-fit:cover;">
+  </div>
+  <div class="ritual-text">
+    <h2>The art of<br><em>slow living</em></h2>
+    <p>We believe fragrance is a ritual — a moment to pause, breathe, and return to yourself. Each Lumière candle is crafted to transform ordinary spaces into sanctuaries.</p>
+    <div class="ritual-steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-text"><h4>Trim your wick</h4><p>Before each burn, trim to 5mm for a clean, even flame.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-text"><h4>First burn</h4><p>Allow the wax pool to reach all edges — 2 to 3 hours.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-text"><h4>Breathe deeply</h4><p>Let the fragrance fill your space and your senses.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENTS -->
+<section class="scents">
+  <div class="section-label">Fragrance Families</div>
+  <h2 class="section-title">Find your <em style="font-family:'Cormorant Garamond',serif;font-style:italic;">signature</em> scent</h2>
+  <div class="scents-grid">
+    <div class="scent-card">
+      <div class="scent-icon">🌹</div>
+      <div class="scent-name">Floral</div>
+      <div class="scent-desc">Rose, jasmine, peony — soft, romantic and feminine fragrances.</div>
+    </div>
+    <div class="scent-card">
+      <div class="scent-icon">🌲</div>
+      <div class="scent-name">Woody</div>
+      <div class="scent-desc">Cedar, vetiver, sandalwood — grounding and earthy warmth.</div>
+    </div>
+    <div class="scent-card">
+      <div class="scent-icon">🍋</div>
+      <div class="scent-name">Citrus</div>
+      <div class="scent-desc">Bergamot, lemon, grapefruit — bright, energizing freshness.</div>
+    </div>
+    <div class="scent-card">
+      <div class="scent-icon">🍂</div>
+      <div class="scent-name">Spiced</div>
+      <div class="scent-desc">Cinnamon, clove, amber — cozy, comforting winter warmth.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonials">
+  <div class="section-label">What They Say</div>
+  <blockquote>"Lighting a Lumière candle has become my nightly ritual. The scent lingers long after the flame is gone — like a memory you can almost touch."</blockquote>
+  <cite>— Sophie M., Paris</cite>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <h3>Join the ritual</h3>
+  <p>Seasonal collections, candlemaking stories, and 10% off your first order.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Your email address">
+    <button>Subscribe</button>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">LUMIÈRE</div>
+  <p>© 2024 Lumière. Handcrafted in Lyon, France.</p>
+  <p>Instagram · Pinterest · Journal</p>
+</footer>
+
+</body>
+</html>

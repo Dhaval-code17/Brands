@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flour & Fire — Artisan Bakery</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300;1,600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--wheat:#f5e6c8;--crust:#8b4513;--dough:#e8d5a3;--dark:#1a0f00;--red:#c0392b;--cream:#fffef9}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--cream);color:var(--dark);font-family:'Karla',sans-serif;overflow-x:hidden}
+
+  nav{position:fixed;top:0;width:100%;z-index:100;padding:20px 60px;display:flex;justify-content:space-between;align-items:center;background:var(--dark)}
+  .logo{font-family:'Fraunces',serif;font-size:22px;font-style:italic;color:var(--wheat);font-weight:300;letter-spacing:1px}
+  nav a{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,230,200,0.55);text-decoration:none;margin-left:30px;transition:color 0.2s}
+  nav a:hover{color:var(--wheat)}
+  .nav-order{background:var(--red);color:var(--cream)!important;padding:10px 24px}
+
+  /* HERO - full bleed with diagonal split */
+  .hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
+  .hero-bg{position:absolute;inset:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.55)sepia(30%)}
+  .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,15,0,0.85) 40%,rgba(139,69,19,0.4) 100%)}
+  .hero-content{position:relative;z-index:2;padding:0 80px;max-width:800px}
+  .hero-badge{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:var(--cream);padding:8px 20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:30px}
+  .hero-badge::before{content:'🔥';font-size:14px}
+  h1{font-family:'Fraunces',serif;font-size:96px;font-weight:300;font-style:italic;color:var(--wheat);line-height:0.95;letter-spacing:-2px}
+  h1 strong{font-style:normal;font-weight:600;color:var(--cream)}
+  .hero-sub{font-size:18px;font-weight:300;color:rgba(245,230,200,0.7);margin-top:28px;max-width:500px;line-height:1.8}
+  .hero-actions{display:flex;gap:20px;margin-top:50px;flex-wrap:wrap}
+  .btn-wheat{background:var(--wheat);color:var(--dark);padding:16px 40px;font-size:13px;letter-spacing:1px;text-decoration:none;font-weight:500;transition:background 0.3s}
+  .btn-wheat:hover{background:var(--dough)}
+  .btn-outline-w{border:1.5px solid rgba(245,230,200,0.4);color:var(--wheat);padding:16px 40px;font-size:13px;letter-spacing:1px;text-decoration:none;transition:border-color 0.3s}
+  .btn-outline-w:hover{border-color:var(--wheat)}
+  .hero-hours{position:absolute;bottom:50px;right:80px;z-index:2;text-align:right}
+  .hero-hours span{display:block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,230,200,0.4)}
+  .hero-hours strong{display:block;font-family:'Fraunces',serif;font-size:20px;color:var(--wheat);margin-top:6px}
+
+  /* SCROLLING BREAD LINE */
+  .bread-strip{background:var(--wheat);padding:16px 0;overflow:hidden}
+  .bread-inner{display:flex;gap:50px;animation:bscroll 22s linear infinite;white-space:nowrap}
+  .bread-inner span{font-size:13px;font-weight:500;color:var(--crust);letter-spacing:1px}
+  @keyframes bscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* DAILY SPECIALS */
+  .specials{padding:100px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .specials-label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--crust);margin-bottom:16px}
+  .specials h2{font-family:'Fraunces',serif;font-size:56px;font-weight:300;font-style:italic;line-height:1.1}
+  .specials h2 strong{font-style:normal;font-weight:600}
+  .specials-text p{font-size:16px;font-weight:300;line-height:1.9;color:rgba(26,15,0,0.65);margin-top:20px}
+  .menu-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+  .pill{padding:10px 22px;border-radius:100px;font-size:12px;cursor:pointer;border:1.5px solid rgba(139,69,19,0.25);color:var(--crust);transition:all 0.2s;text-transform:uppercase;letter-spacing:1px}
+  .pill.active,.pill:hover{background:var(--crust);color:var(--wheat);border-color:var(--crust)}
+  .specials-visual{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .special-img-main{grid-column:1/3;aspect-ratio:16/9;overflow:hidden;border-radius:8px}
+  .special-img-main img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+  .special-img-main:hover img{transform:scale(1.04)}
+  .special-img-sm{aspect-ratio:1;overflow:hidden;border-radius:8px}
+  .special-img-sm img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+  .special-img-sm:hover img{transform:scale(1.05)}
+
+  /* MENU */
+  .menu{padding:100px 60px;background:var(--dark)}
+  .menu h2{font-family:'Fraunces',serif;font-size:56px;font-weight:300;font-style:italic;color:var(--wheat);margin-bottom:60px;text-align:center}
+  .menu h2 strong{font-style:normal}
+  .menu-categories{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+  .menu-cat{background:#0f0700;padding:50px 40px;border-right:1px solid rgba(245,230,200,0.06)}
+  .menu-cat:last-child{border-right:none}
+  .cat-icon{font-size:40px;margin-bottom:20px}
+  .cat-name{font-family:'Fraunces',serif;font-size:28px;color:var(--wheat);font-weight:300;font-style:italic;margin-bottom:30px}
+  .menu-item{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(245,230,200,0.07)}
+  .menu-item:last-of-type{border-bottom:none}
+  .item-name{font-size:14px;color:rgba(245,230,200,0.75);font-weight:300}
+  .item-desc{font-size:11px;color:rgba(245,230,200,0.35);font-weight:300;margin-top:3px}
+  .item-price{font-size:14px;color:var(--wheat);font-weight:500;flex-shrink:0;margin-left:20px}
+
+  /* STORY */
+  .story{background:var(--wheat);padding:100px 60px;display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:center}
+  .story img{width:100%;object-fit:cover;border-radius:4px;height:500px}
+  .story-content .label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--crust);margin-bottom:20px}
+  .story-content h2{font-family:'Fraunces',serif;font-size:52px;font-weight:300;font-style:italic;line-height:1.15;color:var(--dark)}
+  .story-content h2 strong{font-style:normal;font-weight:600}
+  .story-content p{font-size:15px;font-weight:300;line-height:1.9;color:rgba(26,15,0,0.65);margin-top:20px}
+  .founder-sig{margin-top:40px;display:flex;align-items:center;gap:20px;padding-top:30px;border-top:1px solid rgba(139,69,19,0.2)}
+  .founder-avatar{width:60px;height:60px;border-radius:50%;overflow:hidden}
+  .founder-avatar img{width:100%;height:100%;object-fit:cover}
+  .founder-info span{display:block;font-size:13px;font-weight:500;color:var(--dark)}
+  .founder-info small{font-size:11px;color:rgba(26,15,0,0.5);letter-spacing:1px}
+
+  /* INSTAGRAM FEED */
+  .instagram{padding:80px 60px;text-align:center}
+  .instagram h3{font-family:'Fraunces',serif;font-size:42px;font-style:italic;font-weight:300;margin-bottom:8px}
+  .instagram p{color:rgba(26,15,0,0.5);margin-bottom:50px;font-size:14px}
+  .ig-row{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+  .ig-item{aspect-ratio:1;overflow:hidden}
+  .ig-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s,filter 0.3s;filter:saturate(0.85)}
+  .ig-item:hover img{transform:scale(1.08);filter:saturate(1.1)}
+
+  /* ORDER */
+  .order{background:var(--red);padding:80px 60px;text-align:center}
+  .order h2{font-family:'Fraunces',serif;font-size:60px;font-style:italic;font-weight:300;color:var(--cream);margin-bottom:16px}
+  .order p{color:rgba(255,254,249,0.65);font-size:16px;font-weight:300;margin-bottom:40px}
+  .order .btn-wheat{font-size:14px;letter-spacing:2px}
+
+  footer{background:var(--dark);padding:60px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px}
+  .footer-logo{font-family:'Fraunces',serif;font-size:24px;font-style:italic;color:var(--wheat);font-weight:300}
+  footer p{color:rgba(245,230,200,0.3);font-size:13px;font-weight:300;line-height:1.8;margin-top:12px}
+  footer h4{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,230,200,0.4);margin-bottom:20px}
+  footer a{display:block;font-size:13px;color:rgba(245,230,200,0.3);text-decoration:none;margin-bottom:12px;font-weight:300;transition:color 0.2s}
+  footer a:hover{color:var(--wheat)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Flour & Fire</div>
+  <div>
+    <a href="#">Menu</a>
+    <a href="#">Our Story</a>
+    <a href="#">Catering</a>
+    <a href="#">Find Us</a>
+    <a href="#" class="nav-order">Order Online</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1600&q=80" alt="Artisan bread"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Fresh from the oven, daily</div>
+    <h1><strong>Baked</strong><br>with love,<br>fired with</h1>
+    <p class="hero-sub" style="margin-top:0;font-size:72px;font-family:'Fraunces',serif;font-weight:300;font-style:italic;color:var(--red);line-height:1">passion.</p>
+    <p class="hero-sub">Artisan bread, pastries and sweets made every morning before sunrise. No shortcuts. No additives. Just flour, water, salt and fire.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-wheat">View Menu</a>
+      <a href="#" class="btn-outline-w">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-hours">
+    <span>Open today</span>
+    <strong>7am – 6pm</strong>
+  </div>
+</section>
+
+<div class="bread-strip">
+  <div class="bread-inner">
+    <span>🍞 Sourdough</span><span>·</span><span>🥐 Croissants</span><span>·</span><span>🥖 Baguettes</span><span>·</span><span>🧁 Muffins</span><span>·</span><span>🎂 Cakes</span><span>·</span><span>🥨 Pretzels</span><span>·</span><span>🍰 Tarts</span><span>·</span>
+    <span>🍞 Sourdough</span><span>·</span><span>🥐 Croissants</span><span>·</span><span>🥖 Baguettes</span><span>·</span><span>🧁 Muffins</span><span>·</span><span>🎂 Cakes</span><span>·</span><span>🥨 Pretzels</span><span>·</span><span>🍰 Tarts</span><span>·</span>
+  </div>
+</div>
+
+<section class="specials">
+  <div class="specials-text">
+    <div class="specials-label">Today's Specials</div>
+    <h2>Made fresh<br>every <strong>morning</strong></h2>
+    <p>We bake in small batches starting at 4am — what you buy was made hours, not days ago. When it's gone, it's gone.</p>
+    <div class="menu-pills">
+      <span class="pill active">Breads</span>
+      <span class="pill">Pastries</span>
+      <span class="pill">Cakes</span>
+      <span class="pill">Seasonal</span>
+    </div>
+  </div>
+  <div class="specials-visual">
+    <div class="special-img-main"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=700&q=80" alt="Sourdough"></div>
+    <div class="special-img-sm"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80" alt="Croissant"></div>
+    <div class="special-img-sm"><img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400&q=80" alt="Pastries"></div>
+  </div>
+</section>
+
+<section class="menu">
+  <h2>Our <strong>Menu</strong></h2>
+  <div class="menu-categories">
+    <div class="menu-cat">
+      <div class="cat-icon">🍞</div>
+      <div class="cat-name">Breads</div>
+      <div class="menu-item"><div><div class="item-name">Country Sourdough</div><div class="item-desc">72h fermentation</div></div><div class="item-price">₹320</div></div>
+      <div class="menu-item"><div><div class="item-name">Seeded Rye</div><div class="item-desc">Caraway & sunflower</div></div><div class="item-price">₹280</div></div>
+      <div class="menu-item"><div><div class="item-name">Whole Wheat Loaf</div><div class="item-desc">Stoneground flour</div></div><div class="item-price">₹240</div></div>
+      <div class="menu-item"><div><div class="item-name">Focaccia</div><div class="item-desc">Rosemary & olive oil</div></div><div class="item-price">₹260</div></div>
+    </div>
+    <div class="menu-cat">
+      <div class="cat-icon">🥐</div>
+      <div class="cat-name">Pastries</div>
+      <div class="menu-item"><div><div class="item-name">Butter Croissant</div><div class="item-desc">Pure Amul butter</div></div><div class="item-price">₹120</div></div>
+      <div class="menu-item"><div><div class="item-name">Almond Tart</div><div class="item-desc">Frangipane, seasonal fruit</div></div><div class="item-price">₹180</div></div>
+      <div class="menu-item"><div><div class="item-name">Pain au Chocolat</div><div class="item-desc">Belgian dark chocolate</div></div><div class="item-price">₹140</div></div>
+      <div class="menu-item"><div><div class="item-name">Kouign-Amann</div><div class="item-desc">Caramelised, flaky</div></div><div class="item-price">₹160</div></div>
+    </div>
+    <div class="menu-cat">
+      <div class="cat-icon">🎂</div>
+      <div class="cat-name">Cakes & More</div>
+      <div class="menu-item"><div><div class="item-name">Lemon Drizzle</div><div class="item-desc">Meyer lemon curd</div></div><div class="item-price">₹420</div></div>
+      <div class="menu-item"><div><div class="item-name">Carrot Walnut</div><div class="item-desc">Cream cheese frosting</div></div><div class="item-price">₹380</div></div>
+      <div class="menu-item"><div><div class="item-name">Banana Bread</div><div class="item-desc">Tahini & dark choc</div></div><div class="item-price">₹220</div></div>
+      <div class="menu-item"><div><div class="item-name">Tiramisu Slice</div><div class="item-desc">Made fresh weekly</div></div><div class="item-price">₹280</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="story">
+  <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80" alt="Baker">
+  <div class="story-content">
+    <div class="label">Our Story</div>
+    <h2>A <strong>wood-fired</strong><br>obsession that<br>never stopped</h2>
+    <p>Flour & Fire started in Rohan's home kitchen in 2018, baking loaves for neighbors on weekends. The waiting list grew faster than he could handle — so he built a bakery.</p>
+    <p>Today we bake 200+ loaves daily using the same levain starter Rohan has fed every morning since that first weekend.</p>
+    <div class="founder-sig">
+      <div class="founder-avatar"><img src="https://images.unsplash.com/photo-1559564101-2af0d26a3b6b?w=200&q=80" alt="Rohan"></div>
+      <div class="founder-info"><span>Rohan Desai</span><small>Founder & Head Baker</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="instagram">
+  <h3>@flourandfirebakery</h3>
+  <p>Follow us for daily bakes, sold-out alerts, and behind-the-scenes at 4am</p>
+  <div class="ig-row">
+    <div class="ig-item"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&q=80" alt=""></div>
+    <div class="ig-item"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=300&q=80" alt=""></div>
+    <div class="ig-item"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&q=80" alt=""></div>
+    <div class="ig-item"><img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=300&q=80" alt=""></div>
+    <div class="ig-item"><img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=300&q=80" alt=""></div>
+    <div class="ig-item"><img src="https://images.unsplash.com/photo-1564834744159-ff0ea41ba4b9?w=300&q=80" alt=""></div>
+  </div>
+</section>
+
+<section class="order">
+  <h2>Order for collection</h2>
+  <p>Place your order before 8pm for next-day pickup. Freshly baked, just for you.</p>
+  <a href="#" class="btn-wheat">Order Now →</a>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo">Flour & Fire</div>
+    <p>12 Mill Road, Koregaon Park<br>Pune, Maharashtra<br>Open Tue–Sun, 7am–6pm</p>
+  </div>
+  <div>
+    <h4>Menu</h4>
+    <a href="#">Breads</a><a href="#">Pastries</a><a href="#">Cakes</a><a href="#">Catering</a>
+  </div>
+  <div>
+    <h4>Visit</h4>
+    <a href="#">Find Us</a><a href="#">Hours</a><a href="#">Events</a><a href="#">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

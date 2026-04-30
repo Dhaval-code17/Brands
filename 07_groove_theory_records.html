@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Groove Theory — Vinyl Records</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#090909;--yellow:#f0d050;--white:#f5f5f0;--gray:#1a1a1a;--mid:#888;--red:#d94040}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--white);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;cursor:crosshair}
+
+  nav{position:fixed;top:0;width:100%;z-index:100;padding:20px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(240,208,80,0.15)}
+  .logo{font-family:'Anton',sans-serif;font-size:28px;letter-spacing:2px;color:var(--yellow)}
+  .logo span{color:var(--white)}
+  nav a{font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;color:rgba(245,245,240,0.5);margin-left:30px;transition:color 0.2s}
+  nav a:hover{color:var(--yellow)}
+  .nav-listen{border:1px solid var(--yellow);color:var(--yellow)!important;padding:10px 24px}
+
+  /* HERO - brutalist */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--yellow)}
+  .hero-text{padding:140px 60px 60px;display:flex;flex-direction:column;justify-content:flex-end;border-right:2px solid var(--yellow)}
+  .hero-text h1{font-family:'Anton',sans-serif;font-size:120px;line-height:0.9;letter-spacing:-2px;text-transform:uppercase}
+  .hero-text h1 span{color:var(--yellow);display:block}
+  .hero-text h1 em{font-style:normal;color:rgba(245,245,240,0.15)}
+  .hero-sub{font-size:15px;font-weight:300;color:var(--mid);margin-top:30px;line-height:1.8;max-width:420px}
+  .hero-actions{display:flex;gap:0;margin-top:50px}
+  .btn-yellow{background:var(--yellow);color:var(--black);padding:18px 40px;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-right:2px solid var(--black);transition:background 0.2s}
+  .btn-yellow:hover{background:var(--white)}
+  .btn-bdr{border:2px solid var(--yellow);color:var(--yellow);padding:18px 40px;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;margin-left:-2px;transition:all 0.2s}
+  .btn-bdr:hover{background:var(--yellow);color:var(--black)}
+  .hero-visual{position:relative;overflow:hidden}
+  .hero-visual img{width:100%;height:100%;object-fit:cover;filter:grayscale(80%)contrast(1.2);transition:filter 0.5s}
+  .hero-visual:hover img{filter:grayscale(40%)contrast(1.1)}
+  .vinyl-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,var(--black) 30%,transparent 31%,rgba(240,208,80,0.3) 32%,var(--black) 33%,var(--black) 40%,rgba(240,208,80,0.1) 41%,var(--black) 42%);animation:spin 8s linear infinite;mix-blend-mode:overlay;opacity:0.6}
+  @keyframes spin{from{transform:translate(-50%,-50%)rotate(0)}to{transform:translate(-50%,-50%)rotate(360deg)}}
+  .hero-tag{position:absolute;bottom:30px;right:30px;background:var(--yellow);color:var(--black);padding:12px 20px;font-family:'Anton',sans-serif;font-size:18px;letter-spacing:2px}
+
+  /* TICKER */
+  .ticker{background:var(--yellow);padding:14px 0;overflow:hidden;border-top:2px solid var(--yellow);border-bottom:2px solid var(--black)}
+  .ticker-inner{display:flex;gap:40px;animation:tick 20s linear infinite;white-space:nowrap}
+  .ticker-inner span{font-family:'Anton',sans-serif;font-size:16px;letter-spacing:2px;color:var(--black);text-transform:uppercase}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* NEW ARRIVALS */
+  .new-arrivals{padding:80px 60px;border-bottom:2px solid rgba(240,208,80,0.15)}
+  .section-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:50px;border-bottom:2px solid var(--yellow);padding-bottom:20px}
+  .section-header h2{font-family:'Anton',sans-serif;font-size:60px;letter-spacing:1px;text-transform:uppercase}
+  .section-header a{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--yellow);text-decoration:none}
+  .records-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+  .record-card{border:1px solid rgba(240,208,80,0.1);position:relative;cursor:pointer;transition:border-color 0.2s;overflow:hidden}
+  .record-card:hover{border-color:var(--yellow)}
+  .record-img{position:relative;overflow:hidden;aspect-ratio:1}
+  .record-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(60%);transition:filter 0.4s,transform 0.5s}
+  .record-card:hover .record-img img{filter:grayscale(20%);transform:scale(1.04)}
+  .record-genre{position:absolute;top:12px;left:12px;background:var(--yellow);color:var(--black);font-family:'Anton',sans-serif;font-size:11px;letter-spacing:2px;padding:4px 10px;text-transform:uppercase}
+  .record-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(9,9,9,0.5);opacity:0;transition:opacity 0.3s;font-size:48px}
+  .record-card:hover .record-play{opacity:1}
+  .record-info{padding:16px}
+  .record-title{font-size:14px;font-weight:600;line-height:1.3}
+  .record-artist{font-size:12px;color:var(--mid);margin-top:4px;letter-spacing:1px}
+  .record-meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+  .record-year{font-size:11px;color:rgba(245,245,240,0.3);letter-spacing:2px}
+  .record-price{font-family:'Anton',sans-serif;font-size:20px;color:var(--yellow)}
+
+  /* GENRES */
+  .genres{padding:80px 60px;border-bottom:2px solid rgba(240,208,80,0.15)}
+  .genres h2{font-family:'Anton',sans-serif;font-size:60px;text-transform:uppercase;margin-bottom:40px}
+  .genres-list{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+  .genre-item{display:flex;align-items:center;gap:20px;padding:25px 30px;border:1px solid rgba(240,208,80,0.08);cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden}
+  .genre-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--yellow);transition:width 0.3s}
+  .genre-item:hover::before{width:4px}
+  .genre-item:hover{border-color:var(--yellow);padding-left:36px}
+  .genre-num{font-family:'Anton',sans-serif;font-size:42px;color:rgba(240,208,80,0.15);transition:color 0.2s}
+  .genre-item:hover .genre-num{color:rgba(240,208,80,0.4)}
+  .genre-name{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:1px;text-transform:uppercase}
+  .genre-count{font-size:12px;color:var(--mid);letter-spacing:2px;margin-top:4px}
+  .genre-arrow{margin-left:auto;font-size:22px;color:rgba(240,208,80,0);transition:color 0.2s}
+  .genre-item:hover .genre-arrow{color:var(--yellow)}
+
+  /* STORY */
+  .story{background:var(--gray);padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;border-top:2px solid rgba(240,208,80,0.15)}
+  .story-img{position:relative}
+  .story-img img{width:100%;height:500px;object-fit:cover;filter:grayscale(50%)}
+  .story-img::after{content:'EST. 2014';position:absolute;bottom:20px;right:20px;background:var(--yellow);color:var(--black);font-family:'Anton',sans-serif;font-size:18px;padding:10px 20px;letter-spacing:3px}
+  .story-content .eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--yellow);margin-bottom:16px}
+  .story-content h2{font-family:'Anton',sans-serif;font-size:60px;text-transform:uppercase;line-height:1.0;margin-bottom:24px}
+  .story-content p{font-size:15px;font-weight:300;line-height:1.9;color:var(--mid);margin-bottom:16px}
+  .stats-row{display:flex;gap:40px;margin-top:40px;padding-top:30px;border-top:1px solid rgba(240,208,80,0.15)}
+  .stat-box{text-align:center}
+  .stat-box strong{display:block;font-family:'Anton',sans-serif;font-size:42px;color:var(--yellow)}
+  .stat-box span{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mid)}
+
+  /* LISTEN */
+  .listening{padding:80px 60px;border-top:2px solid rgba(240,208,80,0.15)}
+  .listening h2{font-family:'Anton',sans-serif;font-size:60px;text-transform:uppercase;margin-bottom:40px}
+  .playlist{display:flex;flex-direction:column;gap:0}
+  .track{display:flex;align-items:center;gap:24px;padding:20px 24px;border-bottom:1px solid rgba(240,208,80,0.08);cursor:pointer;transition:background 0.2s}
+  .track:hover{background:rgba(240,208,80,0.05)}
+  .track-num{font-family:'Anton',sans-serif;font-size:20px;color:rgba(240,208,80,0.2);width:40px}
+  .track:hover .track-num{color:var(--yellow)}
+  .track-img{width:60px;height:60px;object-fit:cover;filter:grayscale(60%)}
+  .track-info{flex:1}
+  .track-name{font-size:15px;font-weight:500}
+  .track-artist{font-size:12px;color:var(--mid);margin-top:4px}
+  .track-duration{font-family:'Anton',sans-serif;font-size:18px;color:rgba(245,245,240,0.25)}
+  .track-play{font-size:22px;color:var(--yellow);opacity:0;transition:opacity 0.2s;margin-right:10px}
+  .track:hover .track-play{opacity:1}
+
+  /* NEWSLETTER */
+  .newsletter{background:var(--yellow);padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .newsletter h2{font-family:'Anton',sans-serif;font-size:64px;text-transform:uppercase;color:var(--black);line-height:1}
+  .newsletter-form input{width:100%;background:var(--black);border:none;padding:18px 24px;color:var(--white);font-size:14px;font-family:'Space Grotesk',sans-serif;margin-bottom:12px;outline:none}
+  .newsletter-form input::placeholder{color:rgba(245,245,240,0.3)}
+  .newsletter-form button{width:100%;background:var(--black);color:var(--yellow);border:none;padding:18px;font-family:'Anton',sans-serif;font-size:18px;letter-spacing:3px;cursor:pointer;transition:background 0.2s}
+  .newsletter-form button:hover{background:#111}
+  .newsletter p{color:rgba(9,9,9,0.5);font-size:13px;font-weight:300;margin-top:10px}
+
+  footer{background:var(--gray);padding:60px;display:flex;justify-content:space-between;align-items:center;border-top:2px solid rgba(240,208,80,0.15)}
+  .footer-logo{font-family:'Anton',sans-serif;font-size:28px;color:var(--yellow)}
+  footer p{color:rgba(245,245,240,0.25);font-size:12px;letter-spacing:2px;text-transform:uppercase}
+  footer nav{position:static;padding:0;border:none;background:none;display:flex;gap:0}
+  footer nav a{font-size:12px;margin-left:30px;opacity:0.3;transition:opacity 0.2s}
+  footer nav a:hover{opacity:1;color:var(--yellow)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">GROOVE<span>THEORY</span></div>
+  <div>
+    <a href="#">New Arrivals</a>
+    <a href="#">Genres</a>
+    <a href="#">Rare Finds</a>
+    <a href="#">About</a>
+    <a href="#" class="nav-listen">▶ Listen</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1><span>Vinyl</span>never <em>really</em>died</h1>
+    <p class="hero-sub">Curated vintage and new vinyl records — jazz, soul, hip-hop, rock. Found at flea markets, estate sales, and direct from pressings worldwide.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-yellow">Shop Records</a>
+      <a href="#" class="btn-bdr">New Arrivals</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=900&q=80" alt="Records">
+    <div class="vinyl-overlay"></div>
+    <div class="hero-tag">12" + 7" + 10"</div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Jazz ✦</span><span>Soul ✦</span><span>Hip-Hop ✦</span><span>Funk ✦</span><span>Rock ✦</span><span>Blues ✦</span><span>Electronic ✦</span><span>Reggae ✦</span><span>Classical ✦</span>
+    <span>Jazz ✦</span><span>Soul ✦</span><span>Hip-Hop ✦</span><span>Funk ✦</span><span>Rock ✦</span><span>Blues ✦</span><span>Electronic ✦</span><span>Reggae ✦</span><span>Classical ✦</span>
+  </div>
+</div>
+
+<section class="new-arrivals">
+  <div class="section-header">
+    <h2>New Arrivals</h2>
+    <a href="#">View All →</a>
+  </div>
+  <div class="records-grid">
+    <div class="record-card">
+      <div class="record-img">
+        <img src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=500&q=80" alt="Jazz">
+        <span class="record-genre">Jazz</span>
+        <div class="record-play">▶</div>
+      </div>
+      <div class="record-info">
+        <div class="record-title">Kind of Blue</div>
+        <div class="record-artist">Miles Davis</div>
+        <div class="record-meta"><span class="record-year">1959</span><span class="record-price">$28</span></div>
+      </div>
+    </div>
+    <div class="record-card">
+      <div class="record-img">
+        <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=500&q=80" alt="Soul">
+        <span class="record-genre">Soul</span>
+        <div class="record-play">▶</div>
+      </div>
+      <div class="record-info">
+        <div class="record-title">What's Going On</div>
+        <div class="record-artist">Marvin Gaye</div>
+        <div class="record-meta"><span class="record-year">1971</span><span class="record-price">$34</span></div>
+      </div>
+    </div>
+    <div class="record-card">
+      <div class="record-img">
+        <img src="https://images.unsplash.com/photo-1619983081593-e2ba5b543168?w=500&q=80" alt="Hip-Hop">
+        <span class="record-genre">Hip-Hop</span>
+        <div class="record-play">▶</div>
+      </div>
+      <div class="record-info">
+        <div class="record-title">Illmatic</div>
+        <div class="record-artist">Nas</div>
+        <div class="record-meta"><span class="record-year">1994</span><span class="record-price">$45</span></div>
+      </div>
+    </div>
+    <div class="record-card">
+      <div class="record-img">
+        <img src="https://images.unsplash.com/photo-1511735111819-9a3efd16269b?w=500&q=80" alt="Electronic">
+        <span class="record-genre">Electronic</span>
+        <div class="record-play">▶</div>
+      </div>
+      <div class="record-info">
+        <div class="record-title">Discovery</div>
+        <div class="record-artist">Daft Punk</div>
+        <div class="record-meta"><span class="record-year">2001</span><span class="record-price">$38</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="genres">
+  <h2>Browse by Genre</h2>
+  <div class="genres-list">
+    <div class="genre-item"><div class="genre-num">01</div><div><div class="genre-name">Jazz & Blues</div><div class="genre-count">420 Records</div></div><div class="genre-arrow">→</div></div>
+    <div class="genre-item"><div class="genre-num">02</div><div><div class="genre-name">Soul & Funk</div><div class="genre-count">310 Records</div></div><div class="genre-arrow">→</div></div>
+    <div class="genre-item"><div class="genre-num">03</div><div><div class="genre-name">Hip-Hop</div><div class="genre-count">280 Records</div></div><div class="genre-arrow">→</div></div>
+    <div class="genre-item"><div class="genre-num">04</div><div><div class="genre-name">Rock & Punk</div><div class="genre-count">560 Records</div></div><div class="genre-arrow">→</div></div>
+    <div class="genre-item"><div class="genre-num">05</div><div><div class="genre-name">Electronic</div><div class="genre-count">195 Records</div></div><div class="genre-arrow">→</div></div>
+    <div class="genre-item"><div class="genre-num">06</div><div><div class="genre-name">World Music</div><div class="genre-count">340 Records</div></div><div class="genre-arrow">→</div></div>
+  </div>
+</section>
+
+<section class="story">
+  <div class="story-img">
+    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=700&q=80" alt="Record Shop">
+  </div>
+  <div class="story-content">
+    <div class="eyebrow">Our Story</div>
+    <h2>Obsessed Since '14</h2>
+    <p>Groove Theory started as a crate-digging addiction. Ten years later, we're still finding incredible records at estate sales, flea markets, and direct from international pressings.</p>
+    <p>Our Mumbai shop holds 4,000+ records. Our online store ships worldwide. Every record is graded, cleaned, and heard before it's listed.</p>
+    <div class="stats-row">
+      <div class="stat-box"><strong>4K+</strong><span>Records in stock</span></div>
+      <div class="stat-box"><strong>60+</strong><span>Countries shipped</span></div>
+      <div class="stat-box"><strong>10</strong><span>Years digging</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="listening">
+  <h2>Currently Spinning</h2>
+  <div class="playlist">
+    <div class="track">
+      <span class="track-num">01</span>
+      <img class="track-img" src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=120&q=80" alt="">
+      <div class="track-info"><div class="track-name">So What</div><div class="track-artist">Miles Davis</div></div>
+      <span class="track-play">▶</span>
+      <span class="track-duration">9:21</span>
+    </div>
+    <div class="track">
+      <span class="track-num">02</span>
+      <img class="track-img" src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=120&q=80" alt="">
+      <div class="track-info"><div class="track-name">Mercy Mercy Me</div><div class="track-artist">Marvin Gaye</div></div>
+      <span class="track-play">▶</span>
+      <span class="track-duration">3:51</span>
+    </div>
+    <div class="track">
+      <span class="track-num">03</span>
+      <img class="track-img" src="https://images.unsplash.com/photo-1619983081593-e2ba5b543168?w=120&q=80" alt="">
+      <div class="track-info"><div class="track-name">N.Y. State of Mind</div><div class="track-artist">Nas</div></div>
+      <span class="track-play">▶</span>
+      <span class="track-duration">4:54</span>
+    </div>
+    <div class="track">
+      <span class="track-num">04</span>
+      <img class="track-img" src="https://images.unsplash.com/photo-1511735111819-9a3efd16269b?w=120&q=80" alt="">
+      <div class="track-info"><div class="track-name">Harder Better Faster</div><div class="track-artist">Daft Punk</div></div>
+      <span class="track-play">▶</span>
+      <span class="track-duration">3:44</span>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <h2>Stay in the groove</h2>
+  <div>
+    <div class="newsletter-form">
+      <input type="email" placeholder="your@email.com">
+      <button>JOIN THE CRATE ▶</button>
+    </div>
+    <p>Weekly new arrivals, rare finds, and crate-digging stories. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">GROOVE THEORY</div>
+  <p>© 2024 · Mumbai, India</p>
+  <nav>
+    <a href="#">Instagram</a>
+    <a href="#">Discogs</a>
+    <a href="#">Bandcamp</a>
+    <a href="#">Contact</a>
+  </nav>
+</footer>
+
+</body>
+</html>

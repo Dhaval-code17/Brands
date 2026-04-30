@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kōhi Roasters — Single Origin Coffee</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --espresso: #1c1008;
+    --latte: #c8a97e;
+    --oat: #f2ead8;
+    --crema: #e8d5b0;
+    --forest: #2d3d2d;
+    --white: #fafaf8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--white); color:var(--espresso); font-family:'DM Sans',sans-serif; overflow-x:hidden; }
+
+  nav { position:fixed; top:0; width:100%; z-index:100; padding:20px 60px; display:flex; justify-content:space-between; align-items:center; }
+  .nav-bg { background:rgba(250,250,248,0.95); backdrop-filter:blur(12px); border-bottom:1px solid rgba(28,16,8,0.08); }
+  .logo { font-family:'DM Serif Display',serif; font-size:24px; letter-spacing:1px; }
+  .logo span { color:var(--latte); }
+  nav a { font-size:13px; color:var(--espresso); text-decoration:none; margin-left:35px; opacity:0.7; font-weight:300; transition:opacity 0.2s; }
+  nav a:hover { opacity:1; }
+  .nav-cta { background:var(--espresso); color:var(--white)!important; opacity:1!important; padding:10px 24px; border-radius:100px; font-size:13px!important; }
+
+  /* HERO */
+  .hero { min-height:100vh; display:grid; grid-template-columns:55% 45%; }
+  .hero-content { padding:160px 80px 80px; display:flex; flex-direction:column; justify-content:center; }
+  .hero-tag { display:inline-flex; align-items:center; gap:10px; background:var(--oat); border-radius:100px; padding:8px 16px 8px 8px; font-size:12px; font-weight:500; margin-bottom:40px; width:fit-content; }
+  .hero-tag-dot { width:24px; height:24px; background:var(--forest); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--white); font-size:10px; }
+  h1 { font-family:'DM Serif Display',serif; font-size:88px; line-height:0.95; letter-spacing:-2px; }
+  h1 em { display:block; font-style:italic; color:var(--latte); }
+  .hero-sub { font-size:17px; font-weight:300; line-height:1.7; color:rgba(28,16,8,0.65); margin-top:30px; max-width:400px; }
+  .hero-buttons { display:flex; gap:16px; margin-top:50px; flex-wrap:wrap; }
+  .btn-dark { background:var(--espresso); color:var(--white); border:none; padding:16px 36px; border-radius:100px; font-size:14px; font-weight:500; cursor:pointer; text-decoration:none; display:inline-block; transition:transform 0.2s,box-shadow 0.2s; }
+  .btn-dark:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(28,16,8,0.3); }
+  .btn-outline { background:transparent; color:var(--espresso); border:1.5px solid rgba(28,16,8,0.2); padding:16px 36px; border-radius:100px; font-size:14px; cursor:pointer; text-decoration:none; display:inline-block; transition:border-color 0.2s; }
+  .btn-outline:hover { border-color:var(--espresso); }
+  .hero-stats { display:flex; gap:50px; margin-top:60px; padding-top:40px; border-top:1px solid rgba(28,16,8,0.08); }
+  .stat-num { font-family:'DM Serif Display',serif; font-size:36px; color:var(--espresso); }
+  .stat-label { font-size:12px; color:rgba(28,16,8,0.5); margin-top:4px; font-weight:300; }
+
+  .hero-visual { background:var(--espresso); position:relative; overflow:hidden; }
+  .hero-visual img { width:100%; height:100%; object-fit:cover; opacity:0.85; mix-blend-mode:luminosity; }
+  .hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(28,16,8,0.7) 0%,transparent 60%); }
+  .hero-badge { position:absolute; bottom:60px; right:60px; width:130px; height:130px; border:1px solid rgba(200,169,126,0.6); border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; color:var(--latte); animation:spin 20s linear infinite; }
+  .hero-badge span { font-size:9px; letter-spacing:3px; text-transform:uppercase; display:block; }
+  @keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+  .hero-badge-center { position:absolute; bottom:60px; right:60px; width:130px; height:130px; display:flex; align-items:center; justify-content:center; color:var(--latte); font-size:28px; }
+
+  /* ROAST STRIP */
+  .roast-strip { background:var(--forest); padding:20px 0; overflow:hidden; }
+  .strip-inner { display:flex; gap:50px; animation:scrolll 25s linear infinite; white-space:nowrap; }
+  .strip-inner span { font-size:12px; letter-spacing:3px; color:rgba(242,234,216,0.7); text-transform:uppercase; }
+  .strip-inner .dot { color:var(--latte); }
+  @keyframes scrolll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ORIGINS */
+  .origins { padding:120px 80px; }
+  .section-eyebrow { font-size:12px; letter-spacing:4px; text-transform:uppercase; color:var(--latte); margin-bottom:16px; font-weight:500; }
+  .section-title { font-family:'DM Serif Display',serif; font-size:54px; line-height:1.15; }
+  .origins-layout { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-top:60px; }
+  .origin-card { border-radius:16px; overflow:hidden; position:relative; }
+  .origin-card img { width:100%; aspect-ratio:1; object-fit:cover; display:block; transition:transform 0.5s; }
+  .origin-card:hover img { transform:scale(1.04); }
+  .origin-info { padding:28px; background:var(--oat); }
+  .origin-country { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--latte); margin-bottom:8px; }
+  .origin-name { font-family:'DM Serif Display',serif; font-size:28px; }
+  .origin-notes { font-size:13px; color:rgba(28,16,8,0.6); margin-top:8px; font-weight:300; }
+  .origin-price { font-size:18px; font-weight:500; color:var(--espresso); margin-top:16px; }
+  .origins-text { display:flex; flex-direction:column; justify-content:center; }
+  .origins-text p { font-size:16px; font-weight:300; line-height:1.9; color:rgba(28,16,8,0.7); margin-bottom:30px; }
+  .origins-text .accent { font-family:'DM Serif Display',serif; font-size:22px; font-style:italic; color:var(--espresso); margin-bottom:20px; }
+
+  /* PROCESS */
+  .process { background:var(--espresso); padding:120px 80px; }
+  .process h2 { font-family:'DM Serif Display',serif; font-size:54px; color:var(--oat); margin-bottom:80px; }
+  .process h2 em { font-style:italic; color:var(--latte); }
+  .process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
+  .process-step { padding:40px 30px; border-right:1px solid rgba(242,234,216,0.08); }
+  .process-step:last-child { border-right:none; }
+  .step-img { width:100%; aspect-ratio:1; object-fit:cover; margin-bottom:30px; border-radius:8px; filter:grayscale(30%); }
+  .step-n { font-family:'DM Serif Display',serif; font-size:64px; color:rgba(200,169,126,0.2); line-height:1; margin-bottom:16px; }
+  .step-title { font-size:15px; font-weight:500; color:var(--oat); margin-bottom:10px; }
+  .step-desc { font-size:13px; color:rgba(242,234,216,0.4); line-height:1.8; font-weight:300; }
+
+  /* SHOP */
+  .shop { padding:120px 80px; background:var(--crema); }
+  .shop-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:60px; }
+  .shop-header h2 { font-family:'DM Serif Display',serif; font-size:54px; }
+  .shop-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .shop-card { background:var(--white); border-radius:16px; overflow:hidden; transition:transform 0.3s,box-shadow 0.3s; }
+  .shop-card:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(28,16,8,0.12); }
+  .shop-card img { width:100%; aspect-ratio:1; object-fit:cover; }
+  .shop-card-info { padding:24px; }
+  .roast-badge { display:inline-block; padding:4px 12px; border-radius:100px; font-size:10px; font-weight:500; letter-spacing:1px; text-transform:uppercase; margin-bottom:12px; }
+  .light { background:#fff3e0; color:#b36a00; }
+  .medium { background:#ffe0cc; color:#9b3a00; }
+  .dark { background:#ffd6c0; color:#7a2000; }
+  .shop-card-name { font-family:'DM Serif Display',serif; font-size:22px; }
+  .shop-card-origin { font-size:12px; color:rgba(28,16,8,0.5); margin-top:4px; }
+  .shop-card-footer { display:flex; justify-content:space-between; align-items:center; margin-top:16px; }
+  .shop-card-price { font-size:20px; font-weight:500; }
+  .add-btn { width:36px; height:36px; background:var(--espresso); color:var(--white); border:none; border-radius:50%; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+  .add-btn:hover { background:var(--latte); }
+
+  /* BREW GUIDE */
+  .brew { padding:80px; background:var(--forest); }
+  .brew-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+  .brew img { width:100%; border-radius:16px; object-fit:cover; max-height:500px; }
+  .brew-content h2 { font-family:'DM Serif Display',serif; font-size:48px; color:var(--oat); margin-bottom:20px; }
+  .brew-content h2 em { font-style:italic; color:var(--latte); }
+  .brew-content p { color:rgba(242,234,216,0.6); font-size:15px; line-height:1.8; font-weight:300; margin-bottom:30px; }
+  .brew-methods { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:40px; }
+  .brew-method { border:1px solid rgba(242,234,216,0.2); color:var(--oat); padding:10px 20px; border-radius:100px; font-size:13px; cursor:pointer; transition:all 0.2s; }
+  .brew-method:hover, .brew-method.active { background:var(--latte); border-color:var(--latte); color:var(--espresso); font-weight:500; }
+
+  /* NEWSLETTER */
+  .newsletter { background:var(--oat); padding:80px; text-align:center; }
+  .newsletter h3 { font-family:'DM Serif Display',serif; font-size:48px; margin-bottom:16px; }
+  .newsletter p { color:rgba(28,16,8,0.6); font-size:15px; margin-bottom:40px; font-weight:300; }
+  .nl-form { display:flex; gap:12px; max-width:440px; margin:0 auto; }
+  .nl-form input { flex:1; padding:16px 24px; border:1.5px solid rgba(28,16,8,0.15); border-radius:100px; font-size:14px; outline:none; background:var(--white); font-family:'DM Sans',sans-serif; }
+  .nl-form button { background:var(--espresso); color:var(--white); border:none; padding:16px 28px; border-radius:100px; font-size:14px; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; }
+
+  footer { background:var(--espresso); padding:60px 80px; display:flex; justify-content:space-between; align-items:center; }
+  footer .logo { color:var(--oat); font-size:22px; }
+  footer p { color:rgba(242,234,216,0.3); font-size:12px; }
+  .social-links { display:flex; gap:20px; }
+  .social-links a { color:rgba(242,234,216,0.4); font-size:13px; text-decoration:none; transition:color 0.2s; }
+  .social-links a:hover { color:var(--latte); }
+</style>
+</head>
+<body>
+
+<nav class="nav-bg">
+  <div class="logo">kō<span>hi</span> roasters</div>
+  <div>
+    <a href="#">Origins</a>
+    <a href="#">Roasts</a>
+    <a href="#">Brew Guide</a>
+    <a href="#">Subscription</a>
+    <a href="#" class="nav-cta">Shop Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="hero-tag-dot">☕</div>
+      Single Origin · Small Batch
+    </div>
+    <h1>Coffee<br>worth<br><em>waking for</em></h1>
+    <p class="hero-sub">Ethically sourced from family farms across Ethiopia, Colombia and Guatemala — roasted fresh to order.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn-dark">Shop Roasts</a>
+      <a href="#" class="btn-outline">Learn Our Story</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">12</div><div class="stat-label">Origins</div></div>
+      <div><div class="stat-num">6</div><div class="stat-label">Roast Profiles</div></div>
+      <div><div class="stat-num">48h</div><div class="stat-label">Fresh to Door</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80" alt="Coffee roasting">
+    <div class="hero-overlay"></div>
+    <div class="hero-badge">
+      <span>✦ ROASTED ✦</span>
+      <span>FRESH</span>
+      <span>DAILY ✦</span>
+    </div>
+    <div class="hero-badge-center">☕</div>
+  </div>
+</section>
+
+<div class="roast-strip">
+  <div class="strip-inner">
+    <span>Ethiopia Yirgacheffe</span><span class="dot">✦</span>
+    <span>Colombia Huila</span><span class="dot">✦</span>
+    <span>Guatemala Antigua</span><span class="dot">✦</span>
+    <span>Kenya AA</span><span class="dot">✦</span>
+    <span>Panama Geisha</span><span class="dot">✦</span>
+    <span>Brazil Cerrado</span><span class="dot">✦</span>
+    <span>Ethiopia Yirgacheffe</span><span class="dot">✦</span>
+    <span>Colombia Huila</span><span class="dot">✦</span>
+    <span>Guatemala Antigua</span><span class="dot">✦</span>
+    <span>Kenya AA</span><span class="dot">✦</span>
+    <span>Panama Geisha</span><span class="dot">✦</span>
+    <span>Brazil Cerrado</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<section class="origins">
+  <div class="section-eyebrow">Where It Begins</div>
+  <h2 class="section-title">Every cup has<br>a <em style="font-family:'DM Serif Display',serif;font-style:italic;">story</em></h2>
+  <div class="origins-layout">
+    <div>
+      <div class="origin-card">
+        <img src="https://images.unsplash.com/photo-1520371035529-a9a1c2b46f02?w=700&q=80" alt="Ethiopia">
+        <div class="origin-info">
+          <div class="origin-country">🇪🇹 Ethiopia</div>
+          <div class="origin-name">Yirgacheffe Natural</div>
+          <div class="origin-notes">Blueberry · Jasmine · Dark Chocolate</div>
+          <div class="origin-price">$22 / 250g</div>
+        </div>
+      </div>
+    </div>
+    <div class="origins-text">
+      <div class="accent">"We travel to the farms, not the auctions."</div>
+      <p>Every Kōhi origin is visited in person. We spend weeks in harvest season, cupping alongside farmers, building relationships that span years — not just seasons.</p>
+      <p>Our commitment to direct trade means better pay for farmers and better coffee for you. We share our green coffee sourcing reports publicly.</p>
+      <a href="#" class="btn-dark" style="width:fit-content">See All Origins →</a>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <h2>From <em>cherry</em><br>to cup</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <img class="step-img" src="https://images.unsplash.com/photo-1611174797136-5e1a4b12461c?w=400&q=80" alt="Harvesting">
+      <div class="step-n">01</div>
+      <div class="step-title">Selective Harvest</div>
+      <div class="step-desc">Only perfectly ripe cherries are hand-picked by our partner farmers.</div>
+    </div>
+    <div class="process-step">
+      <img class="step-img" src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&q=80" alt="Processing">
+      <div class="step-n">02</div>
+      <div class="step-title">Careful Processing</div>
+      <div class="step-desc">Washed, natural or honey — each lot processed for peak expression.</div>
+    </div>
+    <div class="process-step">
+      <img class="step-img" src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80" alt="Roasting">
+      <div class="step-n">03</div>
+      <div class="step-title">Precision Roasting</div>
+      <div class="step-desc">We roast in small 10kg batches for complete control over every profile.</div>
+    </div>
+    <div class="process-step">
+      <img class="step-img" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80" alt="Brewing">
+      <div class="step-n">04</div>
+      <div class="step-title">Shipped Fresh</div>
+      <div class="step-desc">Sealed with nitrogen and shipped within 48 hours of roasting.</div>
+    </div>
+  </div>
+</section>
+
+<section class="shop">
+  <div class="shop-header">
+    <h2>Current Offering</h2>
+    <a href="#" class="btn-outline">View All →</a>
+  </div>
+  <div class="shop-grid">
+    <div class="shop-card">
+      <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=80" alt="Colombia">
+      <div class="shop-card-info">
+        <span class="roast-badge light">Light Roast</span>
+        <div class="shop-card-name">Colombia Huila</div>
+        <div class="shop-card-origin">Cauca Valley · Washed</div>
+        <div class="shop-card-footer">
+          <span class="shop-card-price">$26</span>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="shop-card">
+      <img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?w=600&q=80" alt="Ethiopia">
+      <div class="shop-card-info">
+        <span class="roast-badge medium">Medium Roast</span>
+        <div class="shop-card-name">Ethiopia Guji</div>
+        <div class="shop-card-origin">Oromia · Natural</div>
+        <div class="shop-card-footer">
+          <span class="shop-card-price">$28</span>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="shop-card">
+      <img src="https://images.unsplash.com/photo-1551030173-122aabc4489c?w=600&q=80" alt="Guatemala">
+      <div class="shop-card-info">
+        <span class="roast-badge dark">Dark Roast</span>
+        <div class="shop-card-name">Guatemala Antigua</div>
+        <div class="shop-card-origin">Sacatepéquez · Honey</div>
+        <div class="shop-card-footer">
+          <span class="shop-card-price">$24</span>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brew">
+  <div class="brew-inner">
+    <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=700&q=80" alt="Brewing">
+    <div class="brew-content">
+      <h2>Brew it<br><em>perfectly</em></h2>
+      <p>From pour-over to French press, our brew guides are crafted with barista precision — so you get the most out of every gram.</p>
+      <div class="brew-methods">
+        <span class="brew-method active">V60</span>
+        <span class="brew-method">Chemex</span>
+        <span class="brew-method">AeroPress</span>
+        <span class="brew-method">French Press</span>
+        <span class="brew-method">Espresso</span>
+      </div>
+      <a href="#" class="btn-dark" style="background:var(--latte);color:var(--espresso)">Explore Brew Guides →</a>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="section-eyebrow">Stay Connected</div>
+  <h3>The Weekly Roast</h3>
+  <p>New origins, brewing tips, and first access to limited releases — every Tuesday morning.</p>
+  <div class="nl-form">
+    <input type="email" placeholder="your@email.com">
+    <button>Subscribe</button>
+  </div>
+</section>
+
+<footer>
+  <div class="logo" style="font-family:'DM Serif Display',serif;">Kōhi Roasters</div>
+  <p>© 2024 Kōhi Roasters. Roasted in Portland, OR.</p>
+  <div class="social-links">
+    <a href="#">Instagram</a>
+    <a href="#">Twitter</a>
+    <a href="#">Newsletter</a>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.brew-method').forEach(m => {
+    m.addEventListener('click', () => {
+      document.querySelectorAll('.brew-method').forEach(x => x.classList.remove('active'));
+      m.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

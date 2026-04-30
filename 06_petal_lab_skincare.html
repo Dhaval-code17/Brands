@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petal Lab — Clean Skincare</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--blush:#f9e8e8;--rose:#e8a0a0;--petal:#d4607a;--deep:#2d1f22;--sage:#8fa88f;--white:#fffefe;--beige:#f5f0ea}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--white);color:var(--deep);font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden}
+
+  nav{position:fixed;top:0;width:100%;z-index:100;padding:20px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,254,254,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,96,122,0.1)}
+  .logo{font-family:'Libre Baskerville',serif;font-size:22px;font-style:italic;color:var(--petal)}
+  nav a{font-size:13px;color:var(--deep);text-decoration:none;margin-left:32px;opacity:0.6;transition:opacity 0.2s}
+  nav a:hover{opacity:1}
+  .nav-shop{background:var(--petal);color:var(--white)!important;opacity:1!important;padding:10px 26px;border-radius:100px;font-size:13px}
+
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1.1fr 0.9fr;background:var(--blush);overflow:hidden}
+  .hero-left{padding:140px 70px 80px;display:flex;flex-direction:column;justify-content:center;background:var(--beige)}
+  .hero-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(212,96,122,0.1);border:1px solid rgba(212,96,122,0.2);border-radius:100px;padding:8px 18px;font-size:12px;color:var(--petal);font-weight:500;margin-bottom:32px;width:fit-content}
+  .hero-chip::before{content:'🌸';font-size:14px}
+  h1{font-family:'Libre Baskerville',serif;font-size:70px;font-weight:400;line-height:1.05;letter-spacing:-1px}
+  h1 em{font-style:italic;color:var(--petal)}
+  .hero-desc{font-size:17px;font-weight:300;line-height:1.9;color:rgba(45,31,34,0.6);margin-top:24px;max-width:400px}
+  .hero-btns{display:flex;gap:16px;margin-top:48px;flex-wrap:wrap}
+  .btn-petal{background:var(--petal);color:var(--white);padding:16px 36px;border-radius:100px;font-size:14px;text-decoration:none;font-weight:500;transition:background 0.3s}
+  .btn-petal:hover{background:var(--deep)}
+  .btn-alt{border:1.5px solid rgba(45,31,34,0.2);color:var(--deep);padding:16px 36px;border-radius:100px;font-size:14px;text-decoration:none;transition:border-color 0.2s}
+  .btn-alt:hover{border-color:var(--deep)}
+  .hero-trust{display:flex;gap:30px;margin-top:50px;padding-top:30px;border-top:1px solid rgba(212,96,122,0.15)}
+  .trust-item{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(45,31,34,0.5)}
+  .trust-icon{font-size:16px}
+
+  .hero-right{display:grid;grid-template-rows:2fr 1fr;gap:4px;background:var(--blush)}
+  .hero-main-img{overflow:hidden}
+  .hero-main-img img{width:100%;height:100%;object-fit:cover;transition:transform 8s ease}
+  .hero-main-img:hover img{transform:scale(1.04)}
+  .hero-sub-imgs{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+  .hero-sub-img{overflow:hidden}
+  .hero-sub-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+  .hero-sub-img:hover img{transform:scale(1.06)}
+
+  /* PROMISE BAND */
+  .promise{background:var(--deep);padding:50px 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(212,96,122,0.1)}
+  .promise-item{padding:20px 30px;border-right:1px solid rgba(249,232,232,0.08);text-align:center}
+  .promise-item:last-child{border-right:none}
+  .promise-icon{font-size:28px;margin-bottom:12px}
+  .promise-title{font-size:13px;font-weight:500;color:var(--blush);margin-bottom:6px;letter-spacing:0.5px}
+  .promise-sub{font-size:12px;color:rgba(249,232,232,0.35);font-weight:300;line-height:1.6}
+
+  /* BESTSELLERS */
+  .bestsellers{padding:100px 60px;background:var(--white)}
+  .section-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px}
+  .section-eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--petal);margin-bottom:12px}
+  .section-top h2{font-family:'Libre Baskerville',serif;font-size:50px;font-weight:400}
+  .section-top h2 em{font-style:italic;color:var(--petal)}
+  .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .product-card{position:relative}
+  .product-img-wrap{overflow:hidden;border-radius:20px;background:var(--blush);aspect-ratio:3/4;margin-bottom:18px;position:relative}
+  .product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+  .product-card:hover .product-img-wrap img{transform:scale(1.06)}
+  .prod-tag{position:absolute;top:16px;left:16px;background:var(--petal);color:var(--white);padding:5px 14px;border-radius:100px;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+  .product-type{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:6px}
+  .product-name{font-family:'Libre Baskerville',serif;font-size:19px;font-weight:400}
+  .product-concern{font-size:12px;color:rgba(45,31,34,0.45);margin-top:4px;font-weight:300}
+  .product-footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+  .product-price{font-size:18px;font-weight:600;color:var(--deep)}
+  .product-size{font-size:11px;color:rgba(45,31,34,0.4)}
+  .add-btn{width:38px;height:38px;background:var(--petal);color:var(--white);border:none;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s}
+  .add-btn:hover{background:var(--deep)}
+
+  /* ROUTINE BUILDER */
+  .routine{padding:100px 60px;background:var(--beige);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .routine h2{font-family:'Libre Baskerville',serif;font-size:52px;font-weight:400;margin-bottom:20px}
+  .routine h2 em{font-style:italic;color:var(--petal)}
+  .routine p{font-size:15px;font-weight:300;line-height:1.9;color:rgba(45,31,34,0.65);margin-bottom:30px}
+  .steps-list{display:flex;flex-direction:column;gap:0}
+  .step-item{display:flex;gap:20px;align-items:flex-start;padding:20px 0;border-bottom:1px solid rgba(212,96,122,0.12);cursor:pointer;transition:background 0.2s}
+  .step-item:last-child{border-bottom:none}
+  .step-num-circle{width:42px;height:42px;border-radius:50%;background:var(--blush);color:var(--petal);font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s}
+  .step-item:hover .step-num-circle{background:var(--petal);color:var(--white)}
+  .step-content h4{font-size:15px;font-weight:500;margin-bottom:4px}
+  .step-content p{font-size:13px;color:rgba(45,31,34,0.5);font-weight:300;line-height:1.6}
+  .routine-img{border-radius:24px;overflow:hidden}
+  .routine-img img{width:100%;height:600px;object-fit:cover}
+
+  /* INGREDIENTS */
+  .ingredients{padding:100px 60px;background:var(--deep);color:var(--blush)}
+  .ingredients h2{font-family:'Libre Baskerville',serif;font-size:52px;font-weight:400;text-align:center;margin-bottom:16px}
+  .ingredients h2 em{font-style:italic;color:var(--rose)}
+  .ingredients p.sub{text-align:center;color:rgba(249,232,232,0.4);font-size:15px;font-weight:300;margin-bottom:70px}
+  .ing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+  .ing-card{position:relative;overflow:hidden;cursor:pointer}
+  .ing-card img{width:100%;height:280px;object-fit:cover;transition:transform 0.5s,filter 0.3s;filter:saturate(0.7)}
+  .ing-card:hover img{transform:scale(1.06);filter:saturate(1)}
+  .ing-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;background:linear-gradient(to top,rgba(45,31,34,0.9) 0%,transparent 60%);transition:opacity 0.3s}
+  .ing-name{font-family:'Libre Baskerville',serif;font-size:24px;color:var(--blush)}
+  .ing-benefit{font-size:12px;color:rgba(249,232,232,0.55);margin-top:6px;font-weight:300}
+  .ing-detail{font-size:13px;color:rgba(249,232,232,0.7);margin-top:10px;line-height:1.7;max-height:0;overflow:hidden;transition:max-height 0.3s}
+  .ing-card:hover .ing-detail{max-height:100px}
+
+  /* TESTIMONIALS */
+  .testimonials{padding:100px 60px;background:var(--blush)}
+  .testimonials h2{font-family:'Libre Baskerville',serif;font-size:48px;font-weight:400;text-align:center;margin-bottom:50px}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .testi-card{background:var(--white);border-radius:20px;padding:32px}
+  .stars{color:var(--petal);font-size:14px;margin-bottom:16px;letter-spacing:2px}
+  .testi-text{font-family:'Libre Baskerville',serif;font-size:16px;font-style:italic;line-height:1.7;color:var(--deep)}
+  .testi-author{margin-top:20px;font-size:13px;font-weight:500;color:var(--petal)}
+  .testi-product{font-size:11px;color:rgba(45,31,34,0.4);margin-top:2px}
+
+  /* QUIZ */
+  .quiz{padding:80px 60px;text-align:center;background:var(--white)}
+  .quiz h2{font-family:'Libre Baskerville',serif;font-size:50px;font-weight:400;margin-bottom:16px}
+  .quiz h2 em{font-style:italic;color:var(--petal)}
+  .quiz p{color:rgba(45,31,34,0.5);font-size:16px;font-weight:300;margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto}
+  .quiz-btn{background:var(--petal);color:var(--white);padding:20px 50px;border-radius:100px;font-size:15px;font-weight:500;border:none;cursor:pointer;transition:background 0.3s;font-family:'Plus Jakarta Sans',sans-serif}
+  .quiz-btn:hover{background:var(--deep)}
+
+  footer{padding:60px;background:var(--deep);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px}
+  .footer-logo{font-family:'Libre Baskerville',serif;font-size:22px;font-style:italic;color:var(--rose)}
+  footer p{color:rgba(249,232,232,0.3);font-size:13px;font-weight:300;line-height:1.8;margin-top:12px}
+  footer h4{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(249,232,232,0.35);margin-bottom:20px}
+  footer a{display:block;color:rgba(249,232,232,0.3);font-size:13px;text-decoration:none;margin-bottom:12px;font-weight:300;transition:color 0.2s}
+  footer a:hover{color:var(--blush)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">petal lab</div>
+  <div>
+    <a href="#">Shop</a>
+    <a href="#">Routine Builder</a>
+    <a href="#">Ingredients</a>
+    <a href="#">Journal</a>
+    <a href="#" class="nav-shop">Shop Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-chip">Clinically Tested · 100% Clean</div>
+    <h1>Skin that<br>feels like<br><em>itself</em></h1>
+    <p class="hero-desc">Science-led, botanically inspired skincare formulated without compromise. For every skin type, every skin tone, every person.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-petal">Shop Skincare</a>
+      <a href="#" class="btn-alt">Take Skin Quiz</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><span class="trust-icon">🌿</span> Vegan</div>
+      <div class="trust-item"><span class="trust-icon">🐰</span> Cruelty-Free</div>
+      <div class="trust-item"><span class="trust-icon">♻️</span> Refillable</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-main-img"><img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=900&q=80" alt="Skincare products"></div>
+    <div class="hero-sub-imgs">
+      <div class="hero-sub-img"><img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=500&q=80" alt="Serum"></div>
+      <div class="hero-sub-img"><img src="https://images.unsplash.com/photo-1573461160327-f2d25c4a1d10?w=500&q=80" alt="Moisturizer"></div>
+    </div>
+  </div>
+</section>
+
+<div class="promise">
+  <div class="promise-item"><div class="promise-icon">🧪</div><div class="promise-title">Clinically Tested</div><div class="promise-sub">Every formula tested by dermatologists</div></div>
+  <div class="promise-item"><div class="promise-icon">🌿</div><div class="promise-title">Clean Ingredients</div><div class="promise-sub">No parabens, sulfates or synthetic fragrance</div></div>
+  <div class="promise-item"><div class="promise-icon">♻️</div><div class="promise-title">Sustainable Packaging</div><div class="promise-sub">Glass bottles, refillable pods</div></div>
+  <div class="promise-item"><div class="promise-icon">🚢</div><div class="promise-title">Carbon Neutral</div><div class="promise-sub">Offsetting 100% of our shipping emissions</div></div>
+</div>
+
+<section class="bestsellers">
+  <div class="section-top">
+    <div>
+      <div class="section-eyebrow">Bestsellers</div>
+      <h2>Your skin's new<br><em>favourites</em></h2>
+    </div>
+    <a href="#" style="font-size:13px;color:var(--petal);text-decoration:none;letter-spacing:1px">View All Products →</a>
+  </div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="prod-tag">Best Seller</span>
+        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=500&q=80" alt="Glow Serum">
+      </div>
+      <div class="product-type">Serum</div>
+      <div class="product-name">Radiance Vitamin C Serum</div>
+      <div class="product-concern">Brightening · Even Tone</div>
+      <div class="product-footer"><div><div class="product-price">₹1,490</div><div class="product-size">30ml</div></div><button class="add-btn">+</button></div>
+    </div>
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=500&q=80" alt="Moisturizer">
+      </div>
+      <div class="product-type">Moisturiser</div>
+      <div class="product-name">Hydra-Boost Gel Cream</div>
+      <div class="product-concern">Hydration · Plumping</div>
+      <div class="product-footer"><div><div class="product-price">₹1,290</div><div class="product-size">50ml</div></div><button class="add-btn">+</button></div>
+    </div>
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="prod-tag">New</span>
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500&q=80" alt="Toner">
+      </div>
+      <div class="product-type">Toner</div>
+      <div class="product-name">Pore Refining AHA Toner</div>
+      <div class="product-concern">Exfoliating · Smoothing</div>
+      <div class="product-footer"><div><div class="product-price">₹990</div><div class="product-size">150ml</div></div><button class="add-btn">+</button></div>
+    </div>
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=500&q=80" alt="SPF">
+      </div>
+      <div class="product-type">Sun Protection</div>
+      <div class="product-name">Invisible SPF50+ Sunscreen</div>
+      <div class="product-concern">Protection · No White Cast</div>
+      <div class="product-footer"><div><div class="product-price">₹890</div><div class="product-size">40ml</div></div><button class="add-btn">+</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="routine">
+  <div>
+    <h2>Build your<br>perfect <em>routine</em></h2>
+    <p>Skincare shouldn't be complicated. Our 5-step system covers everything your skin needs, morning and night.</p>
+    <div class="steps-list">
+      <div class="step-item"><div class="step-num-circle">1</div><div class="step-content"><h4>Cleanse</h4><p>Remove impurities without stripping natural oils</p></div></div>
+      <div class="step-item"><div class="step-num-circle">2</div><div class="step-content"><h4>Tone</h4><p>Balance and prep skin for maximum absorption</p></div></div>
+      <div class="step-item"><div class="step-num-circle">3</div><div class="step-content"><h4>Treat</h4><p>Target specific concerns with actives</p></div></div>
+      <div class="step-item"><div class="step-num-circle">4</div><div class="step-content"><h4>Moisturise</h4><p>Lock in hydration and protect the skin barrier</p></div></div>
+      <div class="step-item"><div class="step-num-circle">5</div><div class="step-content"><h4>Protect</h4><p>Broad-spectrum SPF, every single day</p></div></div>
+    </div>
+  </div>
+  <div class="routine-img"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&q=80" alt="Skincare routine"></div>
+</section>
+
+<section class="ingredients">
+  <h2>Ingredients we <em>love</em></h2>
+  <p class="sub">Sourced from certified suppliers. Always transparent about what's inside.</p>
+  <div class="ing-grid">
+    <div class="ing-card">
+      <img src="https://images.unsplash.com/photo-1518979186685-27e4f21caef8?w=700&q=80" alt="Rosehip">
+      <div class="ing-overlay">
+        <div class="ing-name">Rosehip Oil</div>
+        <div class="ing-benefit">Vitamin C · Anti-ageing</div>
+        <div class="ing-detail">Cold-pressed from Rosa canina seeds, rich in trans-retinoic acid and antioxidants. Reduces hyperpigmentation and fine lines.</div>
+      </div>
+    </div>
+    <div class="ing-card">
+      <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?w=700&q=80" alt="Hyaluronic Acid">
+      <div class="ing-overlay">
+        <div class="ing-name">Hyaluronic Acid</div>
+        <div class="ing-benefit">Deep Hydration · Plumping</div>
+        <div class="ing-detail">Multi-molecular weight HA penetrates at different skin depths, delivering intense, long-lasting hydration.</div>
+      </div>
+    </div>
+    <div class="ing-card">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80" alt="Niacinamide">
+      <div class="ing-overlay">
+        <div class="ing-name">Niacinamide</div>
+        <div class="ing-benefit">Pore Minimising · Brightening</div>
+        <div class="ing-detail">Vitamin B3 form that reduces pore appearance, evens skin tone, and strengthens the moisture barrier.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <h2>Loved by real skin</h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"My skin has never felt so balanced. Three weeks in and my hormonal breakouts have nearly disappeared."</div>
+      <div class="testi-author">Priya S.</div>
+      <div class="testi-product">Radiance Serum + Hydra-Boost</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"As someone with sensitive skin, I've tried everything. Petal Lab is the only brand that doesn't make me break out."</div>
+      <div class="testi-author">Ananya R.</div>
+      <div class="testi-product">Gentle Cleanser + Toner</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"The SPF is genuinely invisible — no white cast, no stickiness. I've been looking for this for years."</div>
+      <div class="testi-author">Fatima K.</div>
+      <div class="testi-product">Invisible SPF50+</div>
+    </div>
+  </div>
+</section>
+
+<section class="quiz">
+  <h2>Find your<br><em>perfect match</em></h2>
+  <p>Take our 2-minute skin quiz and get a personalised routine built for your skin's unique needs.</p>
+  <button class="quiz-btn">Start Skin Quiz →</button>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo">petal lab</div>
+    <p>Clean skincare formulated in Bangalore. Shipped across India in 3–5 days. Free returns, always.</p>
+  </div>
+  <div>
+    <h4>Shop</h4>
+    <a href="#">Serums</a><a href="#">Moisturisers</a><a href="#">SPF</a><a href="#">Bundles</a>
+  </div>
+  <div>
+    <h4>Learn</h4>
+    <a href="#">Ingredients</a><a href="#">Skin Quiz</a><a href="#">Journal</a><a href="#">Reviews</a>
+  </div>
+  <div>
+    <h4>Company</h4>
+    <a href="#">About</a><a href="#">Sustainability</a><a href="#">Press</a><a href="#">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
