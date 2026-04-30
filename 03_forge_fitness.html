@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORGE — Built to Perform</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --black: #0a0a0a;
+    --red: #e63022;
+    --steel: #2c2c2c;
+    --silver: #c0c0c0;
+    --white: #f8f8f8;
+  }
+  body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px; position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,10,0.95); border-bottom: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+  }
+  .logo { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; letter-spacing: 6px; color: var(--white); text-transform: uppercase; }
+  .logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(248,248,248,0.6); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta { background: var(--red); color: white; padding: 10px 24px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; text-decoration: none; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); transition: all 0.3s; }
+  .nav-cta:hover { background: #ff4438; }
+
+  .hero {
+    height: 100vh; position: relative; overflow: hidden;
+    display: flex; align-items: center;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80') center/cover no-repeat;
+  }
+  .hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(105deg, rgba(10,10,10,0.95) 35%, rgba(10,10,10,0.4));
+  }
+  .hero-content { position: relative; z-index: 2; padding: 0 60px; max-width: 700px; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 16px; }
+  h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(80px, 14vw, 160px); font-weight: 900; text-transform: uppercase; line-height: 0.88; letter-spacing: -2px; margin-bottom: 28px; }
+  h1 span { -webkit-text-stroke: 1px var(--silver); color: transparent; }
+  .hero-desc { font-size: 16px; line-height: 1.7; color: rgba(248,248,248,0.55); max-width: 420px; margin-bottom: 48px; font-weight: 300; }
+  .btn-forge { background: var(--red); color: white; padding: 16px 44px; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; text-decoration: none; clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%); transition: all 0.3s; display: inline-block; }
+  .btn-forge:hover { background: #ff4438; transform: scale(1.02); }
+
+  .ticker {
+    background: var(--red); padding: 14px 0; overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner { display: inline-flex; animation: ticker 20s linear infinite; }
+  .ticker-inner span { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; letter-spacing: 4px; text-transform: uppercase; font-weight: 700; padding: 0 40px; color: white; opacity: 0.9; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .equipment { padding: 120px 60px; }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 80px; font-weight: 900; text-transform: uppercase; margin-bottom: 16px; }
+  .section-title span { color: var(--red); }
+  .section-sub { font-size: 14px; color: rgba(248,248,248,0.45); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 60px; }
+  .eq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+  .eq-card { position: relative; overflow: hidden; cursor: pointer; background: var(--steel); }
+  .eq-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; opacity: 0.8; transition: all 0.5s; filter: saturate(0.7); }
+  .eq-card:hover img { opacity: 1; filter: saturate(1); transform: scale(1.05); }
+  .eq-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(to top, rgba(10,10,10,0.95), transparent); }
+  .eq-name { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+  .eq-cat { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-top: 4px; }
+
+  .promo { display: grid; grid-template-columns: 1fr 1fr; }
+  .promo-img { overflow: hidden; }
+  .promo-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s; }
+  .promo-img:hover img { transform: scale(1.04); }
+  .promo-content { background: var(--red); padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+  .promo-content h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 72px; font-weight: 900; text-transform: uppercase; line-height: 0.9; margin-bottom: 24px; }
+  .promo-content p { font-size: 16px; line-height: 1.7; opacity: 0.85; font-weight: 300; margin-bottom: 40px; }
+  .btn-dark { background: var(--black); color: white; padding: 16px 44px; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; text-decoration: none; clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%); transition: all 0.3s; display: inline-block; width: fit-content; }
+  .btn-dark:hover { background: var(--steel); }
+
+  footer { background: var(--steel); padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 900; letter-spacing: 6px; }
+  .footer-logo span { color: var(--red); }
+  .footer-text { font-size: 12px; color: rgba(248,248,248,0.35); letter-spacing: 1px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">FOR<span>GE</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Equipment</a></li>
+    <li><a href="#">Programs</a></li>
+    <li><a href="#">Apparel</a></li>
+    <li><a href="#">Athletes</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Shop Now</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Professional Grade</p>
+    <h1>Be <span>Iron.</span><br>Be Forge.</h1>
+    <p class="hero-desc">Equipment engineered for those who don't make excuses. Industrial-grade fitness gear built for the relentless pursuit of greatness.</p>
+    <a href="#" class="btn-forge">Shop Equipment</a>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Free Shipping Over $200</span><span>★ 10-Year Warranty</span><span>Professional Grade Steel</span><span>Used by 500+ Elite Athletes</span><span>Free Shipping Over $200</span><span>★ 10-Year Warranty</span><span>Professional Grade Steel</span><span>Used by 500+ Elite Athletes</span>
+  </div>
+</div>
+
+<section class="equipment">
+  <div class="section-title">Our <span>Gear</span></div>
+  <div class="section-sub">Built to outlast your excuses</div>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80" alt="Power Rack">
+      <div class="eq-info"><div class="eq-name">Power Rack Pro</div><div class="eq-cat">Strength Training</div></div>
+    </div>
+    <div class="eq-card">
+      <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80" alt="Weights">
+      <div class="eq-info"><div class="eq-name">Iron Barbell Set</div><div class="eq-cat">Free Weights</div></div>
+    </div>
+    <div class="eq-card">
+      <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=600&q=80" alt="Cardio">
+      <div class="eq-info"><div class="eq-name">FORGE Assault Bike</div><div class="eq-cat">Cardio</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="promo">
+  <div class="promo-img">
+    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80" alt="Training" style="height:500px;">
+  </div>
+  <div class="promo-content">
+    <h2>Build Your Gym</h2>
+    <p>Full commercial-grade home gym packages, customized to your space and goals. Free delivery, professional installation, lifetime support.</p>
+    <a href="#" class="btn-dark">Configure Package</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">FOR<span>GE</span></div>
+  <div class="footer-text">© 2026 FORGE Fitness. All rights reserved.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZENITH — Mastery in Time</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --dark: #0e0c0a;
+    --gold: #c9a96e;
+    --light-gold: #e8d5b0;
+    --white: #f7f4ef;
+    --gray: #1c1a18;
+  }
+  body { background: var(--dark); color: var(--white); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 30px 80px; position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: transparent;
+  }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: 8px; text-transform: uppercase; color: var(--gold); font-weight: 300; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { color: rgba(247,244,239,0.5); text-decoration: none; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 400; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-right { display: flex; gap: 24px; align-items: center; }
+  .nav-right a { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid rgba(201,169,110,0.3); padding: 10px 24px; transition: all 0.3s; }
+  .nav-right a:hover { border-color: var(--gold); background: rgba(201,169,110,0.1); }
+
+  .hero {
+    height: 100vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 80px 80px; background: var(--dark);
+    position: relative; overflow: hidden;
+  }
+  .hero-left::before {
+    content: ''; position: absolute;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+  }
+  .hero-number { font-size: 200px; font-weight: 300; color: rgba(201,169,110,0.05); position: absolute; top: 40px; right: -20px; font-family: 'Cormorant Garamond', serif; line-height: 1; }
+  .hero-eyebrow { font-size: 9px; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 6vw, 84px); font-weight: 300; line-height: 1.08; letter-spacing: 2px; color: var(--white); margin-bottom: 28px; }
+  h1 em { font-style: italic; color: var(--gold); }
+  .hero-desc { font-size: 13px; line-height: 1.9; color: rgba(247,244,239,0.45); max-width: 360px; margin-bottom: 52px; font-weight: 300; letter-spacing: 0.5px; }
+  .btn-gold { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 16px 48px; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; text-decoration: none; transition: all 0.4s; display: inline-block; }
+  .btn-gold:hover { background: var(--gold); color: var(--dark); }
+  .hero-right { overflow: hidden; position: relative; }
+  .hero-right img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-right::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--dark) 0%, transparent 30%);
+  }
+
+  .banner { background: var(--gray); display: flex; justify-content: center; align-items: center; gap: 80px; padding: 28px; border-top: 1px solid rgba(201,169,110,0.1); border-bottom: 1px solid rgba(201,169,110,0.1); }
+  .banner-item { display: flex; align-items: center; gap: 12px; }
+  .banner-icon { color: var(--gold); font-size: 16px; }
+  .banner-text { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(247,244,239,0.5); }
+
+  .collections { padding: 120px 80px; }
+  .section-eyebrow { font-size: 9px; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; color: var(--white); margin-bottom: 64px; letter-spacing: 2px; }
+  .collections-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3px; height: 600px; }
+  .col-card { position: relative; overflow: hidden; cursor: pointer; }
+  .col-card img { width: 100%; height: 100%; object-fit: cover; transition: all 0.8s; filter: brightness(0.8); }
+  .col-card:hover img { transform: scale(1.06); filter: brightness(1); }
+  .col-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 32px; background: linear-gradient(to top, rgba(14,12,10,0.95) 0%, transparent 100%); }
+  .col-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; letter-spacing: 2px; margin-bottom: 8px; }
+  .col-price { font-size: 11px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
+
+  .feature { padding: 80px; background: var(--gray); display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0; border-top: 1px solid rgba(201,169,110,0.1); }
+  .feat-item { padding: 48px 40px; border-right: 1px solid rgba(201,169,110,0.1); }
+  .feat-item:last-child { border-right: none; }
+  .feat-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; color: var(--gold); line-height: 1; margin-bottom: 8px; }
+  .feat-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(247,244,239,0.45); }
+
+  footer { padding: 60px 80px; background: var(--dark); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(201,169,110,0.1); }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; letter-spacing: 8px; text-transform: uppercase; color: var(--gold); font-weight: 300; }
+  .footer-text { font-size: 10px; color: rgba(247,244,239,0.25); letter-spacing: 2px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Zenith</div>
+  <ul class="nav-links">
+    <li><a href="#">Collections</a></li>
+    <li><a href="#">Manufacture</a></li>
+    <li><a href="#">Heritage</a></li>
+    <li><a href="#">Services</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#">Boutiques</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-number">I</div>
+    <p class="hero-eyebrow">Since 1865</p>
+    <h1>Where time<br>meets <em>art</em></h1>
+    <p class="hero-desc">Each Zenith timepiece is the result of centuries of Swiss watchmaking tradition — an obsession with mechanical perfection that transcends time itself.</p>
+    <a href="#" class="btn-gold">Discover the Collection</a>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1548171915-f9dccfb4e7e6?w=900&q=80" alt="Zenith Watch">
+  </div>
+</section>
+
+<div class="banner">
+  <div class="banner-item"><span class="banner-icon">◈</span><span class="banner-text">Swiss Made</span></div>
+  <div class="banner-item"><span class="banner-icon">◈</span><span class="banner-text">In-House Movement</span></div>
+  <div class="banner-item"><span class="banner-icon">◈</span><span class="banner-text">5-Year Warranty</span></div>
+  <div class="banner-item"><span class="banner-icon">◈</span><span class="banner-text">Lifetime Service</span></div>
+</div>
+
+<section class="collections">
+  <p class="section-eyebrow">Curated Timepieces</p>
+  <h2 class="section-title">Iconic Collections</h2>
+  <div class="collections-grid">
+    <div class="col-card">
+      <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=800&q=80" alt="Chronomaster">
+      <div class="col-overlay"><div class="col-name">Chronomaster</div><div class="col-price">From CHF 9,500</div></div>
+    </div>
+    <div class="col-card">
+      <img src="https://images.unsplash.com/photo-1594576722512-e0e7a823e56e?w=400&q=80" alt="Pilot">
+      <div class="col-overlay"><div class="col-name">Pilot</div><div class="col-price">From CHF 7,200</div></div>
+    </div>
+    <div class="col-card">
+      <img src="https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?w=400&q=80" alt="Defy">
+      <div class="col-overlay"><div class="col-name">Defy</div><div class="col-price">From CHF 11,200</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="feature">
+  <div class="feat-item"><div class="feat-num">10Hz</div><div class="feat-label">Beat Frequency</div></div>
+  <div class="feat-item"><div class="feat-num">60h</div><div class="feat-label">Power Reserve</div></div>
+  <div class="feat-item"><div class="feat-num">238</div><div class="feat-label">Components</div></div>
+  <div class="feat-item"><div class="feat-num">±2s</div><div class="feat-label">Daily Precision</div></div>
+</div>
+
+<footer>
+  <div class="footer-logo">Zenith</div>
+  <div class="footer-text">© 2026 Zenith Watches. All rights reserved. Le Locle, Switzerland.</div>
+</footer>
+</body>
+</html>

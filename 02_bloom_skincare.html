@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOOM — Organic Skincare</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --cream: #faf6f1;
+    --blush: #e8c4b8;
+    --sage: #8a9e7e;
+    --brown: #5c3d2e;
+    --text: #2d1f17;
+  }
+  body { background: var(--cream); color: var(--text); font-family: 'Jost', sans-serif; overflow-x: hidden; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 28px 60px; background: var(--cream);
+    border-bottom: 1px solid rgba(92,61,46,0.1);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo { font-family: 'Playfair Display', serif; font-size: 26px; letter-spacing: 3px; font-style: italic; color: var(--brown); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { color: var(--text); text-decoration: none; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--sage); }
+  .nav-icons { display: flex; gap: 20px; font-size: 18px; cursor: pointer; color: var(--brown); }
+
+  .hero {
+    display: grid; grid-template-columns: 1fr 1fr; min-height: 90vh;
+  }
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 60px; background: var(--cream);
+  }
+  .hero-badge {
+    display: inline-block; background: var(--sage); color: white;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    padding: 8px 16px; margin-bottom: 32px; border-radius: 20px; width: fit-content;
+  }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(48px, 6vw, 80px); line-height: 1.1; color: var(--brown); margin-bottom: 24px; }
+  h1 em { font-style: italic; color: var(--sage); }
+  .hero-sub { font-size: 16px; line-height: 1.8; color: rgba(45,31,23,0.65); max-width: 380px; margin-bottom: 48px; font-weight: 300; }
+  .btn-bloom { background: var(--brown); color: var(--cream); padding: 18px 48px; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-radius: 40px; transition: all 0.4s; display: inline-block; }
+  .btn-bloom:hover { background: var(--sage); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(138,158,126,0.3); }
+  .hero-img { overflow: hidden; }
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  .strip { background: var(--blush); padding: 20px 60px; display: flex; justify-content: center; gap: 60px; }
+  .strip-item { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--brown); font-weight: 500; }
+
+  .products { padding: 100px 60px; }
+  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 52px; color: var(--brown); }
+  .view-all { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); text-decoration: none; border-bottom: 1px solid var(--sage); padding-bottom: 2px; }
+  .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .product-card { cursor: pointer; }
+  .product-img { aspect-ratio: 3/4; overflow: hidden; background: #f0e8e0; margin-bottom: 16px; border-radius: 12px; position: relative; }
+  .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+  .product-card:hover .product-img img { transform: scale(1.07); }
+  .product-tag { position: absolute; top: 12px; left: 12px; background: var(--sage); color: white; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 10px; border-radius: 10px; }
+  .product-name { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--brown); margin-bottom: 6px; }
+  .product-sub { font-size: 12px; color: rgba(45,31,23,0.5); letter-spacing: 1px; margin-bottom: 10px; }
+  .product-price { font-size: 16px; font-weight: 500; color: var(--brown); }
+
+  .ritual { background: var(--sage); color: white; padding: 100px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .ritual-text h2 { font-family: 'Playfair Display', serif; font-size: 52px; line-height: 1.1; margin-bottom: 24px; }
+  .ritual-text p { font-size: 16px; line-height: 1.8; opacity: 0.85; font-weight: 300; margin-bottom: 40px; }
+  .btn-white { background: white; color: var(--sage); padding: 16px 40px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 40px; font-weight: 500; transition: all 0.3s; display: inline-block; }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+  .ritual-img { border-radius: 20px; overflow: hidden; }
+  .ritual-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  footer { background: var(--brown); color: var(--cream); padding: 60px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 32px; font-style: italic; }
+  .footer-text { font-size: 12px; opacity: 0.5; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Bloom</div>
+  <ul class="nav-links">
+    <li><a href="#">Skincare</a></li>
+    <li><a href="#">Body</a></li>
+    <li><a href="#">Rituals</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <div class="nav-icons">♡ ✕ ⌕</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-badge">100% Organic</span>
+    <h1>Skin that <em>glows</em> from within</h1>
+    <p class="hero-sub">Handcrafted botanical formulas for radiant, balanced skin. Pure ingredients, mindful rituals, real results.</p>
+    <a href="#" class="btn-bloom">Shop the Collection</a>
+  </div>
+  <div class="hero-img">
+    <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80" alt="Bloom Skincare">
+  </div>
+</section>
+
+<div class="strip">
+  <span class="strip-item">✦ Free from parabens</span>
+  <span class="strip-item">✦ Cruelty-free</span>
+  <span class="strip-item">✦ Certified organic</span>
+  <span class="strip-item">✦ Zero waste packaging</span>
+</div>
+
+<section class="products">
+  <div class="section-header">
+    <h2 class="section-title">Bestsellers</h2>
+    <a href="#" class="view-all">View All →</a>
+  </div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img"><span class="product-tag">Bestseller</span><img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=400&q=80" alt="Rose Serum"></div>
+      <div class="product-name">Rose Glow Serum</div>
+      <div class="product-sub">Brightening · 30ml</div>
+      <div class="product-price">$58</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&q=80" alt="Clay Mask"></div>
+      <div class="product-name">Deep Clay Mask</div>
+      <div class="product-sub">Purifying · 75ml</div>
+      <div class="product-price">$42</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img"><span class="product-tag">New</span><img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&q=80" alt="Facial Oil"></div>
+      <div class="product-name">Botanical Face Oil</div>
+      <div class="product-sub">Nourishing · 20ml</div>
+      <div class="product-price">$74</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=80" alt="Eye Cream"></div>
+      <div class="product-name">Calm Eye Cream</div>
+      <div class="product-sub">Depuffing · 15ml</div>
+      <div class="product-price">$52</div>
+    </div>
+  </div>
+</section>
+
+<section class="ritual">
+  <div class="ritual-text">
+    <h2>Your morning ritual, elevated</h2>
+    <p>Begin each day with intention. Our 3-step ritual system is designed to work in harmony with your skin's natural rhythm — gentle enough for daily use, powerful enough to transform.</p>
+    <a href="#" class="btn-white">Discover the Ritual</a>
+  </div>
+  <div class="ritual-img">
+    <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=700&q=80" alt="Morning Ritual" style="height:460px;">
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Bloom</div>
+  <div class="footer-text">© 2026 Bloom Organics. All rights reserved.</div>
+</footer>
+</body>
+</html>

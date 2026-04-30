@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Band Websites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Rajdhani:wght@300;600;700&family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;700;800&family=Barlow+Condensed:wght@300;700;900&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Orbitron:wght@400;700;900&family=Archivo+Black&family=Josefin+Sans:wght@100;300;700&family=Outfit:wght@200;400;700&family=Unbounded:wght@300;700;900&family=Instrument+Serif:ital@0;1&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* NAV */
+#main-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  background: #0a0a0a; padding: 14px 30px;
+  display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  border-bottom: 1px solid #222;
+}
+#main-nav a {
+  text-decoration: none; font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.08em; padding: 5px 10px;
+  border-radius: 3px; transition: all 0.2s; color: #888;
+  border: 1px solid #333;
+}
+#main-nav a:hover { color: #fff; border-color: #666; }
+#nav-label { color: #444; font-family: 'Space Mono', monospace; font-size: 10px; margin-right: 6px; }
+
+/* SHARED */
+.site { min-height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+.site-inner { flex: 1; display: flex; flex-direction: column; }
+
+/* ======================== 1. OPENAI ======================== */
+#openai {
+  background: #fff;
+  font-family: 'Josefin Sans', sans-serif;
+  padding-top: 70px;
+}
+.openai-hero {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.openai-grid {
+  position: absolute; inset: 0;
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.openai-orb {
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(16,163,127,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  animation: orbFloat 8s ease-in-out infinite;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -52%) scale(1.05); }
+}
+.openai-content {
+  position: relative; z-index: 2;
+  text-align: center; padding: 40px;
+}
+.openai-logo {
+  width: 60px; height: 60px; margin: 0 auto 40px;
+  animation: rotateSlow 20s linear infinite;
+}
+@keyframes rotateSlow { to { transform: rotate(360deg); } }
+.openai-content h1 {
+  font-size: clamp(60px, 10vw, 120px);
+  font-weight: 100; letter-spacing: 0.3em;
+  color: #0a0a0a; line-height: 0.9;
+  text-transform: uppercase;
+}
+.openai-content h1 span { font-weight: 700; color: #10a37f; }
+.openai-tagline {
+  font-size: 13px; letter-spacing: 0.4em; color: #666;
+  margin: 30px 0 50px; text-transform: uppercase;
+}
+.openai-btn {
+  display: inline-block; padding: 16px 48px;
+  border: 2px solid #0a0a0a; color: #0a0a0a;
+  font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+  letter-spacing: 0.3em; text-transform: uppercase; text-decoration: none;
+  transition: all 0.3s; cursor: pointer; background: transparent;
+}
+.openai-btn:hover { background: #0a0a0a; color: #fff; }
+.openai-models {
+  background: #0a0a0a; padding: 80px 60px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px; background: linear-gradient(#0a0a0a, #0a0a0a);
+}
+.openai-model-card {
+  background: #0a0a0a; padding: 40px 30px;
+  border: 1px solid #1a1a1a; transition: border-color 0.3s;
+}
+.openai-model-card:hover { border-color: #10a37f; }
+.openai-model-card .num {
+  font-size: 11px; color: #10a37f; letter-spacing: 0.3em; margin-bottom: 16px;
+}
+.openai-model-card h3 {
+  font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 12px;
+}
+.openai-model-card p { font-size: 12px; color: #666; line-height: 1.7; letter-spacing: 0.05em; }
+
+/* ======================== 2. CLAUDE ======================== */
+#claude {
+  background: #0d0b12;
+  padding-top: 70px;
+}
+.claude-hero {
+  min-height: 100vh;
+  background: #0d0b12;
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.claude-aurora {
+  position: absolute; inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(198,107,255,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(255,140,66,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 50% 20%, rgba(100,180,255,0.08) 0%, transparent 60%);
+  animation: auroraShift 12s ease-in-out infinite;
+}
+@keyframes auroraShift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(20deg); }
+}
+.claude-content {
+  position: relative; z-index: 2;
+  max-width: 900px; padding: 60px 40px;
+}
+.claude-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-style: italic; color: #c66bff;
+  margin-bottom: 24px; letter-spacing: 0.05em;
+}
+.claude-content h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(64px, 9vw, 130px);
+  color: #f5f0ff; line-height: 0.88;
+  margin-bottom: 40px;
+}
+.claude-content h1 em {
+  font-style: italic; color: #c66bff;
+}
+.claude-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 300; color: rgba(245,240,255,0.7);
+  line-height: 1.7; max-width: 560px; margin-bottom: 60px;
+}
+.claude-cta {
+  display: flex; gap: 20px; flex-wrap: wrap;
+}
+.claude-btn-primary {
+  padding: 18px 44px;
+  background: linear-gradient(135deg, #c66bff, #ff8c42);
+  color: #fff; font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; letter-spacing: 0.05em; border: none;
+  cursor: pointer; text-decoration: none;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: opacity 0.3s;
+}
+.claude-btn-primary:hover { opacity: 0.85; }
+.claude-btn-ghost {
+  padding: 18px 44px;
+  background: transparent;
+  color: #c66bff; font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; letter-spacing: 0.05em;
+  border: 1px solid rgba(198,107,255,0.4);
+  cursor: pointer; text-decoration: none;
+  transition: all 0.3s;
+}
+.claude-btn-ghost:hover { border-color: #c66bff; background: rgba(198,107,255,0.05); }
+.claude-traits {
+  padding: 80px 60px;
+  background: linear-gradient(180deg, #0d0b12, #110e1a);
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+.claude-trait {
+  padding: 40px; border: 1px solid rgba(198,107,255,0.15);
+  border-radius: 2px; position: relative; overflow: hidden;
+  transition: border-color 0.3s;
+}
+.claude-trait::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, #c66bff, transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.claude-trait:hover::before { opacity: 1; }
+.claude-trait:hover { border-color: rgba(198,107,255,0.4); }
+.claude-trait-icon {
+  font-size: 32px; margin-bottom: 20px;
+}
+.claude-trait h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px; color: #f5f0ff; margin-bottom: 14px;
+}
+.claude-trait p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; color: rgba(245,240,255,0.55); line-height: 1.7;
+}
+
+/* ======================== 3. PERPLEXITY ======================== */
+#perplexity {
+  background: #05070f;
+  font-family: 'Outfit', sans-serif;
+  padding-top: 70px;
+}
+.perp-hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding: 60px;
+}
+.perp-bg {
+  position: absolute; inset: 0;
+  background: 
+    radial-gradient(circle at 70% 50%, rgba(32,217,169,0.08) 0%, transparent 55%),
+    radial-gradient(circle at 20% 30%, rgba(32,120,255,0.06) 0%, transparent 45%);
+}
+.perp-lines {
+  position: absolute; inset: 0; overflow: hidden;
+}
+.perp-line {
+  position: absolute; height: 1px; background: rgba(32,217,169,0.08);
+  width: 100%;
+  animation: lineSlide 6s linear infinite;
+}
+.perp-line:nth-child(1) { top: 20%; animation-delay: 0s; }
+.perp-line:nth-child(2) { top: 40%; animation-delay: 1.5s; }
+.perp-line:nth-child(3) { top: 60%; animation-delay: 3s; }
+.perp-line:nth-child(4) { top: 80%; animation-delay: 4.5s; }
+@keyframes lineSlide {
+  0% { transform: translateX(-100%); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+.perp-content { position: relative; z-index: 2; max-width: 800px; }
+.perp-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border: 1px solid rgba(32,217,169,0.3);
+  border-radius: 100px; margin-bottom: 48px;
+  font-size: 12px; color: #20d9a9; letter-spacing: 0.1em;
+}
+.perp-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #20d9a9;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.perp-content h1 {
+  font-size: clamp(52px, 8vw, 100px);
+  font-weight: 700; color: #e8f4ff;
+  line-height: 1; margin-bottom: 32px;
+  letter-spacing: -0.03em;
+}
+.perp-content h1 .accent { color: #20d9a9; }
+.perp-desc {
+  font-size: 18px; font-weight: 200; color: rgba(232,244,255,0.55);
+  line-height: 1.7; margin-bottom: 56px; max-width: 520px;
+}
+.perp-search-bar {
+  display: flex; align-items: center;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(32,217,169,0.2);
+  border-radius: 12px; padding: 18px 24px; gap: 16px;
+  max-width: 580px; transition: border-color 0.3s;
+}
+.perp-search-bar:focus-within { border-color: rgba(32,217,169,0.6); }
+.perp-search-icon { color: #20d9a9; font-size: 20px; }
+.perp-search-bar input {
+  flex: 1; background: transparent; border: none; outline: none;
+  color: #e8f4ff; font-family: 'Outfit', sans-serif; font-size: 16px;
+  font-weight: 200;
+}
+.perp-search-bar input::placeholder { color: rgba(232,244,255,0.3); }
+.perp-search-btn {
+  padding: 10px 22px; background: #20d9a9;
+  border: none; border-radius: 8px; color: #05070f;
+  font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; letter-spacing: 0.05em; transition: opacity 0.2s;
+}
+.perp-search-btn:hover { opacity: 0.85; }
+.perp-stats {
+  padding: 60px; display: flex; gap: 60px; flex-wrap: wrap;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.perp-stat h3 {
+  font-size: 48px; font-weight: 700; color: #20d9a9; letter-spacing: -0.04em;
+}
+.perp-stat p { font-size: 14px; color: rgba(232,244,255,0.4); margin-top: 4px; }
+
+/* ======================== 4. KIMI ======================== */
+#kimi {
+  background: #fafaf7;
+  font-family: 'Playfair Display', serif;
+  padding-top: 70px;
+}
+.kimi-hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+.kimi-left {
+  background: #1a1209;
+  padding: 80px 70px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.kimi-left::after {
+  content: '';
+  position: absolute; right: -60px; top: 50%;
+  transform: translateY(-50%);
+  width: 120px; height: 120px;
+  background: #fafaf7;
+  border-radius: 50%;
+}
+.kimi-moon {
+  position: absolute; top: 80px; right: 80px;
+  width: 100px; height: 100px;
+  border-radius: 50%; background: transparent;
+  box-shadow: inset -20px -10px 0 0 #f0c96e;
+}
+.kimi-left h1 {
+  font-size: clamp(72px, 8vw, 110px);
+  color: #f0c96e; line-height: 0.9;
+  margin-bottom: 32px; font-style: italic;
+}
+.kimi-left p {
+  font-size: 18px; color: rgba(240,201,110,0.5);
+  font-style: italic; line-height: 1.7; max-width: 380px;
+  font-weight: 300;
+}
+.kimi-tagline-jp {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 0.3em; color: rgba(240,201,110,0.3);
+  margin-top: 48px; text-transform: uppercase;
+}
+.kimi-right {
+  background: #fafaf7;
+  padding: 80px 70px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.kimi-feature-list { list-style: none; }
+.kimi-feature-list li {
+  padding: 32px 0; border-bottom: 1px solid rgba(26,18,9,0.1);
+  display: flex; align-items: flex-start; gap: 24px;
+}
+.kimi-feature-list li:first-child { border-top: 1px solid rgba(26,18,9,0.1); }
+.kimi-feat-num {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  color: rgba(26,18,9,0.3); letter-spacing: 0.2em; padding-top: 4px;
+  min-width: 36px;
+}
+.kimi-feat-title {
+  font-size: 24px; color: #1a1209; margin-bottom: 8px;
+}
+.kimi-feat-desc {
+  font-size: 15px; color: rgba(26,18,9,0.5);
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  line-height: 1.6;
+}
+@media (max-width: 768px) {
+  .kimi-hero { grid-template-columns: 1fr; }
+  .kimi-left::after { display: none; }
+}
+
+/* ======================== 5. QWEN ======================== */
+#qwen {
+  background: #080012;
+  font-family: 'Orbitron', monospace;
+  padding-top: 70px;
+}
+.qwen-hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding: 60px 40px;
+}
+.qwen-grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(139,0,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139,0,255,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  perspective: 500px;
+  transform: rotateX(60deg) translateY(200px) scale(2);
+  transform-origin: bottom center;
+}
+.qwen-glow {
+  position: absolute; width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(139,0,255,0.2) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  animation: qwenPulse 4s ease-in-out infinite;
+}
+@keyframes qwenPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.4; }
+}
+.qwen-content { position: relative; z-index: 2; text-align: center; }
+.qwen-ver {
+  font-size: 11px; letter-spacing: 0.5em; color: #8b00ff;
+  margin-bottom: 30px; border: 1px solid rgba(139,0,255,0.3);
+  display: inline-block; padding: 8px 20px;
+}
+.qwen-content h1 {
+  font-size: clamp(80px, 15vw, 180px);
+  color: transparent;
+  background: linear-gradient(135deg, #8b00ff 0%, #e040fb 40%, #ff6bcb 70%, #8b00ff 100%);
+  -webkit-background-clip: text; background-clip: text;
+  letter-spacing: 0.15em; line-height: 1;
+  background-size: 200% 200%;
+  animation: gradShift 5s ease-in-out infinite;
+}
+@keyframes gradShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.qwen-sub {
+  font-size: 14px; letter-spacing: 0.4em; color: rgba(224,64,251,0.6);
+  margin-top: 20px; margin-bottom: 50px;
+}
+.qwen-stats {
+  display: flex; gap: 50px; justify-content: center; flex-wrap: wrap;
+  margin-top: 20px;
+}
+.qwen-stat {
+  text-align: center;
+}
+.qwen-stat .val {
+  font-size: 36px; color: #e040fb; font-weight: 700;
+}
+.qwen-stat .lbl {
+  font-size: 9px; letter-spacing: 0.4em; color: rgba(224,64,251,0.4);
+  margin-top: 6px;
+}
+.qwen-features {
+  padding: 60px 40px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2px; background: rgba(139,0,255,0.1);
+}
+.qwen-feat {
+  background: #080012; padding: 40px 30px;
+}
+.qwen-feat-bar {
+  height: 2px; background: linear-gradient(90deg, #8b00ff, #e040fb);
+  margin-bottom: 24px; 
+  width: 0%; animation: barFill 1.5s ease forwards;
+}
+@keyframes barFill { to { width: 100%; } }
+.qwen-feat h3 {
+  font-size: 16px; color: #e040fb; letter-spacing: 0.15em; margin-bottom: 14px;
+}
+.qwen-feat p {
+  font-family: 'Fragment Mono', monospace; font-size: 12px;
+  color: rgba(224,64,251,0.45); line-height: 1.8;
+}
+
+/* ======================== 6. GEMMA ======================== */
+#gemma {
+  background: #fef8f0;
+  font-family: 'Syne', sans-serif;
+  padding-top: 70px;
+}
+.gemma-hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 80px;
+  position: relative; overflow: hidden;
+}
+.gemma-shape1 {
+  position: absolute; top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff7043, #ffd54f);
+  opacity: 0.15;
+  animation: shapeFloat 10s ease-in-out infinite;
+}
+.gemma-shape2 {
+  position: absolute; bottom: -80px; left: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #42a5f5, #ab47bc);
+  opacity: 0.1;
+  animation: shapeFloat 8s ease-in-out infinite reverse;
+}
+@keyframes shapeFloat {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -30px); }
+}
+.gemma-label {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.2em;
+  color: #ff7043; text-transform: uppercase; margin-bottom: 24px;
+}
+.gemma-content { position: relative; z-index: 2; max-width: 900px; }
+.gemma-content h1 {
+  font-size: clamp(60px, 9vw, 130px);
+  font-weight: 800; color: #1a0a00;
+  line-height: 0.85; letter-spacing: -0.04em; margin-bottom: 40px;
+}
+.gemma-content h1 .line2 { color: #ff7043; }
+.gemma-desc {
+  font-size: 20px; font-weight: 400; color: rgba(26,10,0,0.55);
+  line-height: 1.6; max-width: 520px; margin-bottom: 56px;
+}
+.gemma-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+.gemma-btn {
+  padding: 18px 40px; font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.1em;
+  text-decoration: none; border: none; cursor: pointer;
+  text-transform: uppercase; transition: transform 0.2s;
+}
+.gemma-btn:hover { transform: translateY(-2px); }
+.gemma-btn-fill { background: #1a0a00; color: #fef8f0; }
+.gemma-btn-outline {
+  background: transparent; color: #1a0a00;
+  border: 2px solid rgba(26,10,0,0.2);
+}
+.gemma-cards {
+  padding: 80px 80px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px; background: #1a0a00;
+}
+.gemma-card {
+  background: rgba(255,255,255,0.04); padding: 40px 32px;
+  border-radius: 4px; transition: transform 0.3s;
+}
+.gemma-card:hover { transform: translateY(-4px); }
+.gemma-card-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 24px;
+}
+.gemma-card h3 { font-size: 22px; color: #fef8f0; margin-bottom: 12px; }
+.gemma-card p { font-size: 14px; color: rgba(254,248,240,0.4); line-height: 1.7; }
+
+/* ======================== 7. GEMINI ======================== */
+#gemini {
+  background: #030818;
+  font-family: 'Rajdhani', sans-serif;
+  padding-top: 70px;
+}
+.gemini-hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  padding: 60px 40px; text-align: center;
+}
+.gemini-star {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px; height: 400px;
+}
+.gemini-star svg {
+  width: 100%; height: 100%;
+  animation: starSpin 30s linear infinite;
+}
+@keyframes starSpin {
+  to { transform: rotate(360deg); }
+}
+.gemini-rays {
+  position: absolute; inset: 0;
+  background: 
+    conic-gradient(from 0deg at 50% 50%, 
+      rgba(66,133,244,0.05), rgba(234,67,53,0.05),
+      rgba(251,188,5,0.05), rgba(52,168,83,0.05),
+      rgba(66,133,244,0.05)
+    );
+  animation: raysSpin 20s linear infinite;
+}
+@keyframes raysSpin { to { transform: rotate(360deg); } }
+.gemini-content { position: relative; z-index: 2; }
+.gemini-sparkle {
+  font-size: 60px; margin-bottom: 24px;
+  display: block;
+  animation: sparkleFloat 3s ease-in-out infinite;
+}
+@keyframes sparkleFloat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+.gemini-content h1 {
+  font-size: clamp(80px, 12vw, 160px);
+  font-weight: 700; letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #4285f4, #ea4335, #fbbc05, #34a853);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; line-height: 1;
+  background-size: 300% 300%;
+  animation: gemGrad 6s ease-in-out infinite;
+}
+@keyframes gemGrad {
+  0%, 100% { background-position: 0% 50%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+}
+.gemini-content h2 {
+  font-size: 18px; font-weight: 300; letter-spacing: 0.5em;
+  color: rgba(255,255,255,0.4); margin-top: 20px; margin-bottom: 50px;
+}
+.gemini-models {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+.gemini-model-pill {
+  padding: 12px 32px; border-radius: 100px;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.15em;
+  cursor: pointer; transition: all 0.3s;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.04);
+}
+.gemini-model-pill:hover {
+  border-color: rgba(255,255,255,0.4); color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+.gemini-model-pill.active {
+  background: linear-gradient(135deg, rgba(66,133,244,0.3), rgba(234,67,53,0.2));
+  border-color: rgba(66,133,244,0.5); color: #fff;
+}
+.gemini-footer-bar {
+  padding: 60px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 30px;
+}
+.gemini-footer-bar p {
+  font-size: 14px; color: rgba(255,255,255,0.3); letter-spacing: 0.1em;
+}
+.gemini-logo-text {
+  font-size: 24px; font-weight: 700;
+  background: linear-gradient(90deg, #4285f4, #ea4335, #fbbc05, #34a853);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ======================== 8. MISTRAL ======================== */
+#mistral {
+  background: #0f0b00;
+  font-family: 'Barlow Condensed', sans-serif;
+  padding-top: 70px;
+}
+.mistral-hero {
+  min-height: 100vh;
+  display: grid; grid-template-rows: 1fr auto;
+  position: relative; overflow: hidden;
+}
+.mistral-bg-text {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40vw; font-weight: 900; color: rgba(255,165,0,0.03);
+  user-select: none; letter-spacing: -0.05em; pointer-events: none;
+  line-height: 1;
+}
+.mistral-flame {
+  position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+}
+.mistral-flame-inner {
+  width: 0; height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 300px solid rgba(255,140,0,0.12);
+  margin: 0 auto;
+  filter: blur(30px);
+  animation: flameFlicker 2s ease-in-out infinite;
+}
+@keyframes flameFlicker {
+  0%, 100% { transform: scaleX(1); opacity: 0.6; }
+  50% { transform: scaleX(1.1); opacity: 1; }
+}
+.mistral-content {
+  position: relative; z-index: 2;
+  padding: 100px 80px 60px;
+}
+.mistral-content h1 {
+  font-size: clamp(80px, 13vw, 180px);
+  font-weight: 900; letter-spacing: -0.02em;
+  color: #ff8c00; line-height: 0.85;
+  text-transform: uppercase;
+}
+.mistral-content h1 span {
+  display: block; color: rgba(255,140,0,0.3); font-weight: 300;
+}
+.mistral-byline {
+  font-size: 20px; font-weight: 300; letter-spacing: 0.3em;
+  color: rgba(255,140,0,0.5); margin-top: 40px; margin-bottom: 60px;
+  text-transform: uppercase;
+}
+.mistral-btn {
+  display: inline-block; padding: 20px 60px;
+  background: #ff8c00; color: #0f0b00;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; text-decoration: none;
+  transition: all 0.3s; border: none; cursor: pointer;
+}
+.mistral-btn:hover { background: #ffb300; transform: translateX(4px); }
+.mistral-strip {
+  background: #ff8c00; padding: 30px 80px;
+  display: flex; gap: 60px; overflow-x: auto;
+}
+.mistral-strip-item {
+  white-space: nowrap; font-size: 16px; font-weight: 700;
+  letter-spacing: 0.2em; color: #0f0b00; text-transform: uppercase;
+  opacity: 0.7; transition: opacity 0.2s; cursor: pointer;
+}
+.mistral-strip-item:hover { opacity: 1; }
+.mistral-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  background: rgba(255,140,0,0.05);
+}
+.mistral-grid-cell {
+  padding: 50px 40px; border: 1px solid rgba(255,140,0,0.08);
+}
+.mistral-grid-cell h3 {
+  font-size: 32px; font-weight: 700; color: #ff8c00; margin-bottom: 16px;
+}
+.mistral-grid-cell p {
+  font-size: 15px; font-weight: 300; color: rgba(255,140,0,0.4); line-height: 1.7;
+}
+@media (max-width: 768px) { .mistral-grid { grid-template-columns: 1fr; } }
+
+/* ======================== 9. LLAMA ======================== */
+#llama {
+  background: #f2efe8;
+  font-family: 'Archivo Black', sans-serif;
+  padding-top: 70px;
+}
+.llama-hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.llama-tape {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 8px;
+  background: repeating-linear-gradient(90deg, #1877f2 0px, #1877f2 30px, #f2efe8 30px, #f2efe8 32px);
+}
+.llama-main {
+  flex: 1; display: grid;
+  grid-template-columns: 55% 45%;
+}
+.llama-text-col {
+  padding: 80px 70px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.llama-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 0.3em; color: #1877f2; margin-bottom: 32px;
+  text-transform: uppercase;
+}
+.llama-text-col h1 {
+  font-size: clamp(72px, 8vw, 120px);
+  color: #0a0a0a; line-height: 0.82;
+  letter-spacing: -0.04em; margin-bottom: 40px;
+}
+.llama-text-col p {
+  font-family: 'Outfit', sans-serif; font-weight: 300;
+  font-size: 18px; color: rgba(10,10,10,0.55); line-height: 1.7;
+  max-width: 440px; margin-bottom: 56px;
+}
+.llama-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.llama-cta {
+  padding: 16px 36px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 14px; letter-spacing: 0.05em;
+  text-decoration: none; transition: all 0.3s; border: none; cursor: pointer;
+}
+.llama-cta-blue { background: #1877f2; color: #fff; }
+.llama-cta-blue:hover { background: #0d5cc9; }
+.llama-cta-outline {
+  background: transparent; color: #0a0a0a;
+  border: 2px solid rgba(10,10,10,0.2);
+}
+.llama-cta-outline:hover { border-color: #0a0a0a; }
+.llama-visual-col {
+  background: #1877f2; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.llama-big-num {
+  font-size: 220px; color: rgba(255,255,255,0.08); font-weight: 900;
+  letter-spacing: -0.08em; user-select: none; position: absolute;
+  line-height: 1;
+}
+.llama-visual-content { position: relative; z-index: 2; text-align: center; color: #fff; }
+.llama-version { font-size: 80px; margin-bottom: 8px; }
+.llama-visual-content h3 { font-size: 28px; letter-spacing: -0.02em; }
+.llama-visual-content p {
+  font-family: 'Outfit', sans-serif; font-weight: 200;
+  font-size: 15px; margin-top: 12px; opacity: 0.7;
+}
+@media (max-width: 768px) {
+  .llama-main { grid-template-columns: 1fr; }
+  .llama-visual-col { min-height: 40vh; }
+}
+
+/* ======================== 10. DEEPSEEK ======================== */
+#deepseek {
+  background: #000;
+  font-family: 'Unbounded', sans-serif;
+  padding-top: 70px;
+}
+.ds-hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding: 60px 40px;
+}
+.ds-tunnel {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ds-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(0,245,255,0.08);
+  animation: ringPulse 4s ease-in-out infinite;
+}
+.ds-ring:nth-child(1) { width: 200px; height: 200px; animation-delay: 0s; }
+.ds-ring:nth-child(2) { width: 400px; height: 400px; animation-delay: 0.5s; }
+.ds-ring:nth-child(3) { width: 600px; height: 600px; animation-delay: 1s; }
+.ds-ring:nth-child(4) { width: 800px; height: 800px; animation-delay: 1.5s; }
+.ds-ring:nth-child(5) { width: 1000px; height: 1000px; animation-delay: 2s; }
+@keyframes ringPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+.ds-core {
+  position: absolute; width: 60px; height: 60px;
+  border-radius: 50%; background: #00f5ff;
+  box-shadow: 0 0 40px rgba(0,245,255,0.5), 0 0 80px rgba(0,245,255,0.3);
+  animation: coreGlow 2s ease-in-out infinite;
+}
+@keyframes coreGlow {
+  0%, 100% { box-shadow: 0 0 40px rgba(0,245,255,0.5), 0 0 80px rgba(0,245,255,0.3); }
+  50% { box-shadow: 0 0 60px rgba(0,245,255,0.8), 0 0 120px rgba(0,245,255,0.5); }
+}
+.ds-content { position: relative; z-index: 2; text-align: center; }
+.ds-label {
+  font-size: 10px; letter-spacing: 0.6em; color: rgba(0,245,255,0.5);
+  margin-bottom: 40px; display: block;
+}
+.ds-content h1 {
+  font-size: clamp(48px, 8vw, 110px);
+  font-weight: 900; letter-spacing: -0.04em;
+  color: #fff; line-height: 0.9;
+  margin-bottom: 12px;
+}
+.ds-content h1 .ds-accent {
+  color: #00f5ff;
+  text-shadow: 0 0 30px rgba(0,245,255,0.5);
+}
+.ds-content h2 {
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 300; letter-spacing: 0.4em;
+  color: rgba(255,255,255,0.25); margin-bottom: 60px;
+}
+.ds-metrics {
+  display: flex; gap: 50px; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 60px;
+}
+.ds-metric { text-align: center; }
+.ds-metric-val {
+  font-size: 40px; font-weight: 900; color: #00f5ff;
+  text-shadow: 0 0 20px rgba(0,245,255,0.4);
+  letter-spacing: -0.04em;
+}
+.ds-metric-lbl {
+  font-size: 9px; letter-spacing: 0.4em; color: rgba(255,255,255,0.25);
+  margin-top: 6px; display: block;
+}
+.ds-btn {
+  padding: 18px 52px; background: transparent;
+  border: 1px solid #00f5ff; color: #00f5ff;
+  font-family: 'Unbounded', sans-serif; font-size: 11px;
+  font-weight: 700; letter-spacing: 0.3em; cursor: pointer;
+  text-transform: uppercase; text-decoration: none;
+  transition: all 0.3s;
+}
+.ds-btn:hover {
+  background: rgba(0,245,255,0.08);
+  box-shadow: 0 0 30px rgba(0,245,255,0.2);
+}
+
+/* SECTION HEADERS */
+.section-header {
+  text-align: center; padding: 30px 20px 10px;
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 0.3em; color: #555; background: #0a0a0a;
+  border-bottom: 1px solid #111; text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <span id="nav-label">AI BANDS ↓</span>
+  <a href="#openai">OpenAI</a>
+  <a href="#claude">Claude</a>
+  <a href="#perplexity">Perplexity</a>
+  <a href="#kimi">Kimi</a>
+  <a href="#qwen">Qwen</a>
+  <a href="#gemma">Gemma</a>
+  <a href="#gemini">Gemini</a>
+  <a href="#mistral">Mistral</a>
+  <a href="#llama">Llama</a>
+  <a href="#deepseek">DeepSeek</a>
+</nav>
+
+<!-- ============ 1. OPENAI ============ -->
+<div class="section-header">01 — OPENAI</div>
+<section id="openai" class="site">
+  <div class="openai-hero">
+    <div class="openai-grid"></div>
+    <div class="openai-orb"></div>
+    <div class="openai-content">
+      <svg class="openai-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 10 L90 32.5 L90 67.5 L50 90 L10 67.5 L10 32.5 Z" stroke="#10a37f" stroke-width="2" fill="none"/>
+        <path d="M50 25 L75 38.75 L75 62.5 L50 75 L25 62.5 L25 38.75 Z" stroke="#10a37f" stroke-width="1.5" fill="none"/>
+        <circle cx="50" cy="50" r="8" fill="#10a37f"/>
+      </svg>
+      <h1>OPEN<span>AI</span></h1>
+      <p class="openai-tagline">Building safe artificial general intelligence for all of humanity</p>
+      <a href="#" class="openai-btn">Explore Models</a>
+    </div>
+  </div>
+  <div class="openai-models">
+    <div class="openai-model-card">
+      <div class="num">01</div>
+      <h3>GPT-4o</h3>
+      <p>Our most capable model for complex reasoning, vision, and multimodal tasks with realtime capabilities.</p>
+    </div>
+    <div class="openai-model-card">
+      <div class="num">02</div>
+      <h3>o3</h3>
+      <p>Advanced reasoning model trained with reinforcement learning for challenging scientific and math problems.</p>
+    </div>
+    <div class="openai-model-card">
+      <div class="num">03</div>
+      <h3>DALL·E 3</h3>
+      <p>Generate vivid, accurate images and art from natural language with unprecedented fidelity.</p>
+    </div>
+    <div class="openai-model-card">
+      <div class="num">04</div>
+      <h3>Sora</h3>
+      <p>Create and edit videos from text prompts. A new era of creative storytelling through AI-generated motion.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. CLAUDE ============ -->
+<div class="section-header">02 — CLAUDE · ANTHROPIC</div>
+<section id="claude" class="site">
+  <div class="claude-hero">
+    <div class="claude-aurora"></div>
+    <div class="claude-content">
+      <p class="claude-eyebrow">Meet Claude — AI you can trust</p>
+      <h1>Thoughtful<br><em>by nature.</em></h1>
+      <p class="claude-body">Claude is trained to be honest, harmless, and helpful. A thinking partner that reasons carefully, writes beautifully, and knows its limits.</p>
+      <div class="claude-cta">
+        <a href="#" class="claude-btn-primary">Start a conversation</a>
+        <a href="#" class="claude-btn-ghost">Learn about Claude</a>
+      </div>
+    </div>
+  </div>
+  <div class="claude-traits">
+    <div class="claude-trait">
+      <div class="claude-trait-icon">🪞</div>
+      <h3>Genuinely Honest</h3>
+      <p>Claude tells you what it actually thinks, shares uncertainty openly, and will never tell you what you want to hear at the expense of truth.</p>
+    </div>
+    <div class="claude-trait">
+      <div class="claude-trait-icon">✦</div>
+      <h3>Deeply Curious</h3>
+      <p>With broad knowledge across science, arts, history, and philosophy, Claude engages with ideas the way a brilliant generalist does.</p>
+    </div>
+    <div class="claude-trait">
+      <div class="claude-trait-icon">⚖️</div>
+      <h3>Ethically Grounded</h3>
+      <p>Anthropic builds Claude with safety at its core — ensuring each conversation reflects care, nuance, and considered judgment.</p>
+    </div>
+    <div class="claude-trait">
+      <div class="claude-trait-icon">🧩</div>
+      <h3>Powerfully Capable</h3>
+      <p>From long-form writing to complex code, deep analysis, and creative ideation — Claude excels across every domain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. PERPLEXITY ============ -->
+<div class="section-header">03 — PERPLEXITY</div>
+<section id="perplexity" class="site">
+  <div class="perp-hero">
+    <div class="perp-bg"></div>
+    <div class="perp-lines">
+      <div class="perp-line"></div>
+      <div class="perp-line"></div>
+      <div class="perp-line"></div>
+      <div class="perp-line"></div>
+    </div>
+    <div class="perp-content">
+      <div class="perp-badge">
+        <div class="perp-badge-dot"></div>
+        Live Web Intelligence
+      </div>
+      <h1>Ask anything.<br><span class="accent">Get answers.</span></h1>
+      <p class="perp-desc">The AI search engine that cites its sources. Real-time knowledge, zero hallucinations, instant insight on any topic.</p>
+      <div class="perp-search-bar">
+        <span class="perp-search-icon">🔍</span>
+        <input type="text" placeholder="What do you want to know today?">
+        <button class="perp-search-btn">Ask</button>
+      </div>
+    </div>
+  </div>
+  <div class="perp-stats">
+    <div class="perp-stat">
+      <h3>10M+</h3>
+      <p>Daily active queries</p>
+    </div>
+    <div class="perp-stat">
+      <h3>500B+</h3>
+      <p>Tokens processed</p>
+    </div>
+    <div class="perp-stat">
+      <h3>&lt;1s</h3>
+      <p>Average response time</p>
+    </div>
+    <div class="perp-stat">
+      <h3>100%</h3>
+      <p>Source cited</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. KIMI ============ -->
+<div class="section-header">04 — KIMI · MOONSHOT AI</div>
+<section id="kimi" class="site">
+  <div class="kimi-hero">
+    <div class="kimi-left">
+      <div class="kimi-moon"></div>
+      <h1>Kimi</h1>
+      <p>An AI born from moonlight and mathematics — with the longest context window in the world and the poetry to use it.</p>
+      <p class="kimi-tagline">Moonshot AI · Shanghai · 月之暗面</p>
+    </div>
+    <div class="kimi-right">
+      <ul class="kimi-feature-list">
+        <li>
+          <span class="kimi-feat-num">01.</span>
+          <div>
+            <div class="kimi-feat-title">1 Million Token Context</div>
+            <div class="kimi-feat-desc">Read entire codebases, novels, and research papers in a single conversation. Nothing gets forgotten.</div>
+          </div>
+        </li>
+        <li>
+          <span class="kimi-feat-num">02.</span>
+          <div>
+            <div class="kimi-feat-title">Deep Reasoning</div>
+            <div class="kimi-feat-desc">Kimi thinks step by step through complex logic, offering transparent chains of thought.</div>
+          </div>
+        </li>
+        <li>
+          <span class="kimi-feat-num">03.</span>
+          <div>
+            <div class="kimi-feat-title">Multimodal Vision</div>
+            <div class="kimi-feat-desc">See charts, images, PDFs, and screenshots. Understand them all with nuanced precision.</div>
+          </div>
+        </li>
+        <li>
+          <span class="kimi-feat-num">04.</span>
+          <div>
+            <div class="kimi-feat-title">Bilingual Fluency</div>
+            <div class="kimi-feat-desc">Native intelligence in both Chinese and English. Seamlessly switch between worlds.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. QWEN ============ -->
+<div class="section-header">05 — QWEN · ALIBABA CLOUD</div>
+<section id="qwen" class="site">
+  <div class="qwen-hero">
+    <div class="qwen-grid-bg"></div>
+    <div class="qwen-glow"></div>
+    <div class="qwen-content">
+      <div class="qwen-ver">ALIBABA CLOUD · TONGYI SERIES</div>
+      <h1>QWEN</h1>
+      <div class="qwen-sub">NEXT GENERATION · LARGE LANGUAGE MODEL</div>
+      <div class="qwen-stats">
+        <div class="qwen-stat">
+          <div class="val">72B</div>
+          <div class="lbl">Parameters</div>
+        </div>
+        <div class="qwen-stat">
+          <div class="val">128K</div>
+          <div class="lbl">Context length</div>
+        </div>
+        <div class="qwen-stat">
+          <div class="val">29+</div>
+          <div class="lbl">Languages</div>
+        </div>
+        <div class="qwen-stat">
+          <div class="val">#1</div>
+          <div class="lbl">Open benchmark</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="qwen-features">
+    <div class="qwen-feat">
+      <div class="qwen-feat-bar"></div>
+      <h3>CODING</h3>
+      <p>State-of-the-art performance on HumanEval, LiveCodeBench. Write, debug, and optimize production code.</p>
+    </div>
+    <div class="qwen-feat">
+      <div class="qwen-feat-bar" style="animation-delay:0.3s"></div>
+      <h3>MATH</h3>
+      <p>AIME and competition-grade mathematical reasoning. Formal proofs and numerical analysis at expert level.</p>
+    </div>
+    <div class="qwen-feat">
+      <div class="qwen-feat-bar" style="animation-delay:0.6s"></div>
+      <h3>MULTILINGUAL</h3>
+      <p>Fluent in Chinese, English, Arabic, Japanese, and 25+ more. Cultural nuance built in at every layer.</p>
+    </div>
+    <div class="qwen-feat">
+      <div class="qwen-feat-bar" style="animation-delay:0.9s"></div>
+      <h3>OPEN SOURCE</h3>
+      <p>Free weights released on Hugging Face. Build, fine-tune, and deploy without license constraints.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. GEMMA ============ -->
+<div class="section-header">06 — GEMMA · GOOGLE DEEPMIND</div>
+<section id="gemma" class="site">
+  <div class="gemma-hero">
+    <div class="gemma-shape1"></div>
+    <div class="gemma-shape2"></div>
+    <div class="gemma-content">
+      <div class="gemma-label">Google DeepMind · Open Weights</div>
+      <h1>Meet<br><span class="line2">Gemma.</span></h1>
+      <p class="gemma-desc">Lightweight, open models built on the same research that powers Gemini. Responsible AI for everyone, everywhere.</p>
+      <div class="gemma-buttons">
+        <a href="#" class="gemma-btn gemma-btn-fill">Download Weights</a>
+        <a href="#" class="gemma-btn gemma-btn-outline">View Docs</a>
+      </div>
+    </div>
+  </div>
+  <div class="gemma-cards">
+    <div class="gemma-card">
+      <div class="gemma-card-icon" style="background:rgba(255,112,67,0.15)">🔥</div>
+      <h3>Gemma 3</h3>
+      <p>9B parameter model outperforming models 3× its size on key benchmarks. Best-in-class efficiency.</p>
+    </div>
+    <div class="gemma-card">
+      <div class="gemma-card-icon" style="background:rgba(66,165,245,0.15)">⚡</div>
+      <h3>CodeGemma</h3>
+      <p>Specialized for code generation, completion, and reasoning. Trained on 500B tokens of code.</p>
+    </div>
+    <div class="gemma-card">
+      <div class="gemma-card-icon" style="background:rgba(171,71,188,0.15)">👁️</div>
+      <h3>PaliGemma</h3>
+      <p>Vision-language model. Describe images, answer visual questions, and caption scenes with precision.</p>
+    </div>
+    <div class="gemma-card">
+      <div class="gemma-card-icon" style="background:rgba(76,175,80,0.15)">🛡️</div>
+      <h3>ShieldGemma</h3>
+      <p>Content safety classifiers built to detect harmful content and ensure responsible deployment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. GEMINI ============ -->
+<div class="section-header">07 — GEMINI · GOOGLE</div>
+<section id="gemini" class="site">
+  <div class="gemini-hero">
+    <div class="gemini-rays"></div>
+    <div class="gemini-star">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" opacity="0.15">
+        <path d="M100 10 C100 10 105 80 130 100 C105 120 100 190 100 190 C100 190 95 120 70 100 C95 80 100 10 100 10Z" fill="url(#geminiGrad)"/>
+        <defs>
+          <linearGradient id="geminiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4285f4"/>
+            <stop offset="50%" stop-color="#ea4335"/>
+            <stop offset="100%" stop-color="#fbbc05"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="gemini-content">
+      <span class="gemini-sparkle">✦</span>
+      <h1>GEMINI</h1>
+      <h2>MULTIMODAL · REASONING · CREATION</h2>
+      <div class="gemini-models">
+        <button class="gemini-model-pill active">Ultra 2.0</button>
+        <button class="gemini-model-pill">Pro 2.5</button>
+        <button class="gemini-model-pill">Flash 2.0</button>
+        <button class="gemini-model-pill">Nano</button>
+      </div>
+    </div>
+  </div>
+  <div class="gemini-footer-bar">
+    <span class="gemini-logo-text">Gemini</span>
+    <p>Google's most capable AI model family</p>
+    <p>Available in Google Workspace, Android, and API</p>
+  </div>
+</section>
+
+<!-- ============ 8. MISTRAL ============ -->
+<div class="section-header">08 — MISTRAL AI</div>
+<section id="mistral" class="site">
+  <div class="mistral-hero">
+    <div class="mistral-bg-text">M</div>
+    <div class="mistral-flame">
+      <div class="mistral-flame-inner"></div>
+    </div>
+    <div class="mistral-content">
+      <h1>Mis<br><span>tral</span></h1>
+      <p class="mistral-byline">La Plateforme · European AI · Frontier Models</p>
+      <a href="#" class="mistral-btn">Deploy Now</a>
+    </div>
+    <div class="mistral-strip">
+      <span class="mistral-strip-item">Mistral Large</span>
+      <span class="mistral-strip-item">Mixtral 8×22B</span>
+      <span class="mistral-strip-item">Codestral</span>
+      <span class="mistral-strip-item">Mistral Small</span>
+      <span class="mistral-strip-item">Pixtral</span>
+      <span class="mistral-strip-item">Le Chat</span>
+    </div>
+  </div>
+  <div class="mistral-grid">
+    <div class="mistral-grid-cell">
+      <h3>Sovereign</h3>
+      <p>Proudly European. Built for data privacy, regulatory compliance, and on-premise deployment. Your AI, your rules.</p>
+    </div>
+    <div class="mistral-grid-cell">
+      <h3>Efficient</h3>
+      <p>Best performance-per-token in the industry. Mixtral's MoE architecture delivers frontier results at a fraction of the cost.</p>
+    </div>
+    <div class="mistral-grid-cell">
+      <h3>Open</h3>
+      <p>True open-source weights, no strings attached. The most capable open model you can run on your own hardware.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. LLAMA ============ -->
+<div class="section-header">09 — LLAMA · META AI</div>
+<section id="llama" class="site">
+  <div class="llama-hero">
+    <div class="llama-tape"></div>
+    <div class="llama-main">
+      <div class="llama-text-col">
+        <div class="llama-eyebrow">Meta AI Research · Open Foundation Model</div>
+        <h1>Llama<br>3.3</h1>
+        <p>The world's most adopted open-source AI model. Free for research and commercial use. The foundation on which the AI world builds.</p>
+        <div class="llama-actions">
+          <a href="#" class="llama-cta llama-cta-blue">Download Model</a>
+          <a href="#" class="llama-cta llama-cta-outline">View on GitHub</a>
+        </div>
+      </div>
+      <div class="llama-visual-col">
+        <div class="llama-big-num">3</div>
+        <div class="llama-visual-content">
+          <div class="llama-version">🦙</div>
+          <h3>Llama 3.3</h3>
+          <p>405B · 70B · 8B parameters</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10. DEEPSEEK ============ -->
+<div class="section-header">10 — DEEPSEEK AI</div>
+<section id="deepseek" class="site">
+  <div class="ds-hero">
+    <div class="ds-tunnel">
+      <div class="ds-ring"></div>
+      <div class="ds-ring"></div>
+      <div class="ds-ring"></div>
+      <div class="ds-ring"></div>
+      <div class="ds-ring"></div>
+      <div class="ds-core"></div>
+    </div>
+    <div class="ds-content">
+      <span class="ds-label">DeepSeek AI · Hangzhou · 深度求索</span>
+      <h1>DEEP<br><span class="ds-accent">SEEK</span></h1>
+      <h2>INTELLIGENCE · DEPTH · DISCOVERY</h2>
+      <div class="ds-metrics">
+        <div class="ds-metric">
+          <div class="ds-metric-val">671B</div>
+          <span class="ds-metric-lbl">Total params</span>
+        </div>
+        <div class="ds-metric">
+          <div class="ds-metric-val">37B</div>
+          <span class="ds-metric-lbl">Active params (MoE)</span>
+        </div>
+        <div class="ds-metric">
+          <div class="ds-metric-val">128K</div>
+          <span class="ds-metric-lbl">Context window</span>
+        </div>
+      </div>
+      <a href="#" class="ds-btn">Explore DeepSeek R2</a>
+    </div>
+  </div>
+</section>
+
+<script>
+// Gemini pill interaction
+document.querySelectorAll('.gemini-model-pill').forEach(pill => {
+  pill.addEventListener('click', function() {
+    document.querySelectorAll('.gemini-model-pill').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Smooth scroll
+document.querySelectorAll('#main-nav a').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
