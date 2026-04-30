@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PULSE — Feel Every Beat</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #090909;
+    --pink: #ff2d78;
+    --violet: #9b5de5;
+    --yellow: #f7ec59;
+    --cyan: #00f5d4;
+    --white: #f5f5f5;
+    --card: #131313;
+  }
+  body { background: var(--bg); color: var(--white); font-family: 'Syne', sans-serif; overflow-x: hidden; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px; position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(9,9,9,0.92); backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
+  .logo span { color: var(--pink); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(245,245,245,0.5); text-decoration: none; font-size: 14px; font-weight: 600; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--white); }
+  .try-btn { background: var(--pink); color: white; padding: 10px 26px; font-size: 14px; font-weight: 700; text-decoration: none; border-radius: 100px; transition: all 0.3s; }
+  .try-btn:hover { box-shadow: 0 0 24px rgba(255,45,120,0.5); }
+
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 120px 40px 60px; position: relative; overflow: hidden;
+  }
+  .hero-blobs { position: absolute; inset: 0; pointer-events: none; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.12; animation: float 8s ease-in-out infinite; }
+  .blob-1 { width: 500px; height: 500px; background: var(--pink); top: -100px; left: -100px; }
+  .blob-2 { width: 400px; height: 400px; background: var(--violet); top: 20%; right: -100px; animation-delay: -3s; }
+  .blob-3 { width: 350px; height: 350px; background: var(--cyan); bottom: -50px; left: 30%; animation-delay: -5s; }
+  @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(20px, -30px) scale(1.05); } 66% { transform: translate(-15px, 20px) scale(0.95); } }
+  .hero-badge { background: rgba(255,45,120,0.1); border: 1px solid rgba(255,45,120,0.2); color: var(--pink); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 8px 20px; border-radius: 100px; margin-bottom: 32px; display: inline-block; }
+  h1 { font-size: clamp(64px, 10vw, 128px); font-weight: 800; line-height: 0.9; letter-spacing: -3px; margin-bottom: 28px; position: relative; }
+  h1 .pulse-text { background: linear-gradient(135deg, var(--pink), var(--violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  h1 .beat-text { background: linear-gradient(135deg, var(--yellow), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-sub { font-size: 18px; line-height: 1.7; color: rgba(245,245,245,0.5); max-width: 520px; margin: 0 auto 48px; font-weight: 400; }
+  .hero-cta { display: flex; gap: 16px; justify-content: center; margin-bottom: 72px; }
+  .btn-pink { background: var(--pink); color: white; padding: 16px 44px; font-size: 16px; font-weight: 700; text-decoration: none; border-radius: 100px; transition: all 0.3s; }
+  .btn-pink:hover { box-shadow: 0 0 40px rgba(255,45,120,0.5); transform: scale(1.03); }
+  .btn-outline { background: transparent; border: 1px solid rgba(245,245,245,0.15); color: var(--white); padding: 16px 44px; font-size: 16px; font-weight: 700; text-decoration: none; border-radius: 100px; transition: all 0.3s; }
+  .btn-outline:hover { border-color: var(--white); }
+
+  .player {
+    background: var(--card); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px; padding: 32px 40px; max-width: 720px; width: 100%;
+    position: relative; z-index: 2; margin: 0 auto;
+    box-shadow: 0 0 80px rgba(255,45,120,0.08), 0 40px 80px rgba(0,0,0,0.6);
+  }
+  .now-playing { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(245,245,245,0.35); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .now-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); animation: blink 1.5s ease infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+  .track-info { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
+  .track-art { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
+  .track-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .track-artist { font-size: 14px; color: rgba(245,245,245,0.45); }
+  .waveform { height: 48px; background: rgba(255,255,255,0.03); border-radius: 8px; overflow: hidden; position: relative; margin-bottom: 16px; display: flex; align-items: center; gap: 2px; padding: 0 8px; }
+  .bar { width: 3px; border-radius: 2px; background: rgba(255,255,255,0.15); flex-shrink: 0; animation: wave 1.2s ease-in-out infinite; }
+  .bar.active { background: var(--pink); }
+  @keyframes wave { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.8); } }
+  .time-row { display: flex; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 12px; color: rgba(245,245,245,0.3); margin-bottom: 24px; }
+  .controls { display: flex; justify-content: center; align-items: center; gap: 32px; }
+  .ctrl-btn { background: none; border: none; color: rgba(245,245,245,0.4); font-size: 18px; cursor: pointer; transition: color 0.3s; }
+  .ctrl-btn:hover { color: var(--white); }
+  .play-btn { width: 56px; height: 56px; border-radius: 50%; background: var(--pink); border: none; color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 0 24px rgba(255,45,120,0.4); }
+  .play-btn:hover { transform: scale(1.08); box-shadow: 0 0 40px rgba(255,45,120,0.6); }
+
+  .trending { padding: 120px 60px; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--pink); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+  .section-title { font-size: 56px; font-weight: 800; letter-spacing: -2px; margin-bottom: 56px; }
+  .tracks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .track-card { background: var(--card); border: 1px solid rgba(255,255,255,0.04); border-radius: 20px; padding: 20px; cursor: pointer; transition: all 0.3s; }
+  .track-card:hover { border-color: rgba(255,45,120,0.3); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(255,45,120,0.1); }
+  .tc-img { width: 100%; aspect-ratio: 1; border-radius: 12px; object-fit: cover; margin-bottom: 16px; }
+  .tc-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tc-artist { font-size: 13px; color: rgba(245,245,245,0.4); margin-bottom: 14px; }
+  .tc-footer { display: flex; justify-content: space-between; align-items: center; }
+  .tc-time { font-family: 'DM Mono', monospace; font-size: 12px; color: rgba(245,245,245,0.25); }
+  .tc-play { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,45,120,0.15); border: none; color: var(--pink); font-size: 14px; cursor: pointer; transition: all 0.3s; }
+  .tc-play:hover { background: var(--pink); color: white; }
+
+  .plans { padding: 0 60px 120px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .plan-card { background: var(--card); border: 1px solid rgba(255,255,255,0.06); border-radius: 24px; padding: 44px 36px; }
+  .plan-card.featured { border-color: var(--pink); background: linear-gradient(135deg, rgba(255,45,120,0.08), rgba(155,93,229,0.05)); }
+  .plan-badge { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); font-weight: 700; margin-bottom: 20px; }
+  .plan-price { font-size: 52px; font-weight: 800; letter-spacing: -2px; margin-bottom: 8px; }
+  .plan-price span { font-size: 20px; font-weight: 400; color: rgba(245,245,245,0.4); letter-spacing: 0; }
+  .plan-desc { font-size: 14px; color: rgba(245,245,245,0.4); margin-bottom: 32px; }
+  .plan-features { list-style: none; margin-bottom: 36px; }
+  .plan-features li { font-size: 14px; color: rgba(245,245,245,0.6); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 10px; }
+  .plan-features li::before { content: '✓'; color: var(--cyan); font-weight: 700; }
+  .plan-btn { width: 100%; padding: 14px; border-radius: 100px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.3s; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--white); }
+  .plan-btn.featured-btn { background: var(--pink); border-color: var(--pink); color: white; }
+  .plan-btn:hover { opacity: 0.85; }
+
+  footer { background: var(--card); border-top: 1px solid rgba(255,255,255,0.04); padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-size: 20px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
+  .footer-logo span { color: var(--pink); }
+  .footer-text { font-family: 'DM Mono', monospace; font-size: 12px; color: rgba(245,245,245,0.25); }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">PUL<span>SE</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Discover</a></li>
+    <li><a href="#">Charts</a></li>
+    <li><a href="#">Artists</a></li>
+    <li><a href="#">Pricing</a></li>
+  </ul>
+  <a href="#" class="try-btn">Try Free</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-badge">🎵 100M+ Tracks</div>
+  <h1><span class="pulse-text">Feel</span><br><span class="beat-text">Every Beat</span></h1>
+  <p class="hero-sub">Discover music that moves you. Pulse learns your taste, curates your world, and delivers the soundtrack of your life — in lossless audio.</p>
+  <div class="hero-cta">
+    <a href="#" class="btn-pink">Start Listening Free</a>
+    <a href="#" class="btn-outline">View Plans</a>
+  </div>
+  <div class="player">
+    <div class="now-playing"><span class="now-dot"></span>Now Playing</div>
+    <div class="track-info">
+      <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=100&q=80" alt="Album" class="track-art">
+      <div><div class="track-title">Golden Hour</div><div class="track-artist">Luna & The Echo</div></div>
+    </div>
+    <div class="waveform" id="waveform"></div>
+    <div class="time-row"><span>1:24</span><span>3:52</span></div>
+    <div class="controls">
+      <button class="ctrl-btn">⇄</button>
+      <button class="ctrl-btn">⏮</button>
+      <button class="play-btn">▶</button>
+      <button class="ctrl-btn">⏭</button>
+      <button class="ctrl-btn">↺</button>
+    </div>
+  </div>
+</section>
+
+<section class="trending">
+  <p class="section-label">// trending now</p>
+  <h2 class="section-title">Top Picks for You</h2>
+  <div class="tracks-grid">
+    <div class="track-card">
+      <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&q=80" alt="Track 1" class="tc-img">
+      <div class="tc-name">Midnight Drive</div>
+      <div class="tc-artist">The Midnights</div>
+      <div class="tc-footer"><span class="tc-time">3:24</span><button class="tc-play">▶</button></div>
+    </div>
+    <div class="track-card">
+      <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80" alt="Track 2" class="tc-img">
+      <div class="tc-name">Neon Rain</div>
+      <div class="tc-artist">PRISM</div>
+      <div class="tc-footer"><span class="tc-time">4:01</span><button class="tc-play">▶</button></div>
+    </div>
+    <div class="track-card">
+      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&q=80" alt="Track 3" class="tc-img">
+      <div class="tc-name">Cosmos</div>
+      <div class="tc-artist">Solar Drift</div>
+      <div class="tc-footer"><span class="tc-time">5:18</span><button class="tc-play">▶</button></div>
+    </div>
+    <div class="track-card">
+      <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&q=80" alt="Track 4" class="tc-img">
+      <div class="tc-name">Slow Burn</div>
+      <div class="tc-artist">Ember & Glass</div>
+      <div class="tc-footer"><span class="tc-time">3:47</span><button class="tc-play">▶</button></div>
+    </div>
+  </div>
+</section>
+
+<div class="plans">
+  <div class="plan-card">
+    <div class="plan-badge">Free</div>
+    <div class="plan-price">$0<span>/mo</span></div>
+    <div class="plan-desc">Start exploring music for free</div>
+    <ul class="plan-features">
+      <li>Ad-supported streaming</li>
+      <li>320kbps audio quality</li>
+      <li>Mobile & desktop</li>
+      <li>5 skips per hour</li>
+    </ul>
+    <button class="plan-btn">Get Started</button>
+  </div>
+  <div class="plan-card featured">
+    <div class="plan-badge">⚡ Most Popular</div>
+    <div class="plan-price">$9<span>/mo</span></div>
+    <div class="plan-desc">Everything you need to love music</div>
+    <ul class="plan-features">
+      <li>Ad-free, unlimited skips</li>
+      <li>Lossless Hi-Fi audio</li>
+      <li>Offline downloads</li>
+      <li>AI playlist generation</li>
+    </ul>
+    <button class="plan-btn featured-btn">Start Free Trial</button>
+  </div>
+  <div class="plan-card">
+    <div class="plan-badge">Family</div>
+    <div class="plan-price">$16<span>/mo</span></div>
+    <div class="plan-desc">Up to 6 premium accounts</div>
+    <ul class="plan-features">
+      <li>6 individual accounts</li>
+      <li>All Premium features</li>
+      <li>Family Mix playlist</li>
+      <li>Kids safe mode</li>
+    </ul>
+    <button class="plan-btn">Get Family Plan</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">PUL<span>SE</span></div>
+  <div class="footer-text">© 2026 Pulse Music, Inc. All rights reserved.</div>
+</footer>
+
+<script>
+  // Generate waveform bars
+  const waveform = document.getElementById('waveform');
+  const heights = [20, 35, 28, 42, 38, 48, 32, 44, 36, 50, 28, 40, 32, 38, 45, 30, 52, 40, 36, 44, 28, 38, 32, 48, 35, 42, 30, 50, 38, 44, 28, 36, 42, 32, 48, 40, 35, 50, 28, 44];
+  const activeCount = 14;
+  heights.forEach((h, i) => {
+    const bar = document.createElement('div');
+    bar.className = 'bar' + (i < activeCount ? ' active' : '');
+    bar.style.height = h + 'px';
+    bar.style.animationDelay = (i * 0.05) + 's';
+    waveform.appendChild(bar);
+  });
+</script>
+</body>
+</html>
