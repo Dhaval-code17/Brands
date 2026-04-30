@@ -1,7 +1,8 @@
 import os
 
 base_dir = r"c:\Users\Dhaval\OneDrive\Desktop\websites"
-brands = ["nike", "puma", "adidas", "skechers", "bugatti", "titan", "rolex", "patek-philippe", "omega", "cartier"]
+# Running on the new 10 brands
+brands = ["apple", "ferrari", "gucci", "tesla", "red-bull", "porsche", "under-armour", "louis-vuitton", "sony", "vans"]
 
 newsletter_html = """
         <section id="newsletter" class="newsletter-section" style="padding: 100px 5%; text-align: center; border-top: 1px solid rgba(128,128,128,0.2);">
@@ -21,7 +22,7 @@ parallax_js = """
     document.addEventListener('mousemove', (e) => {
         const x = (e.clientX / window.innerWidth - 0.5) * 20;
         const y = (e.clientY / window.innerHeight - 0.5) * 20;
-        const heroImg = document.querySelector('.hero-img, .cover-image img');
+        const heroImg = document.querySelector('.hero-img, .hero-img-box img, .hero-img-container img, .content img, .neon-frame img, .polaroid img, .grid-item img');
         if (heroImg) {
             heroImg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
         }
@@ -37,7 +38,6 @@ for brand in brands:
             content = f.read()
         
         if '<section id="newsletter"' not in content:
-            # Insert before </main>
             content = content.replace("</main>", newsletter_html + "\n    </main>")
             with open(html_path, "w", encoding="utf-8") as f:
                 f.write(content)
@@ -47,8 +47,7 @@ for brand in brands:
             js_content = f.read()
             
         if 'Mouse Parallax Effect' not in js_content:
-            # Append to the end
             with open(js_path, "a", encoding="utf-8") as f:
                 f.write("\n" + parallax_js)
 
-print("Enhancements applied!")
+print("Enhancements applied to the new 10 websites!")

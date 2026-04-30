@@ -1,0 +1,21 @@
+:root { --red: #c8102e; --black: #000; --white: #fff; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Work Sans', sans-serif; background: var(--white); color: var(--black); }
+h1, h2 { font-family: 'Permanent Marker', cursive; }
+.navbar { padding: 1.5rem 5%; background: var(--red); color: white; text-align: center; }
+.logo { font-size: 2.5rem; font-family: 'Permanent Marker', cursive; }
+.skate-hero { padding: 100px 5%; text-align: center; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="2" cy="2" r="1" fill="%23ccc"/></svg>'); }
+.skate-hero h1 { font-size: 5rem; transform: rotate(-5deg); margin-bottom: 3rem; color: var(--red); text-shadow: 2px 2px 0 var(--black); }
+.polaroid { background: white; padding: 15px 15px 50px 15px; display: inline-block; box-shadow: 5px 5px 15px rgba(0,0,0,0.3); transform: rotate(3deg); }
+.polaroid img { width: 100%; max-width: 600px; }
+.classics { position: relative; padding: 100px 5%; text-align: center; overflow: hidden; }
+.checker-bg { position: absolute; top:0; left:0; width:100%; height:100%; background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 40px 40px; opacity: 0.1; z-index: -1; }
+.classics h2 { font-size: 3rem; background: var(--black); color: white; display: inline-block; padding: 10px 20px; transform: rotate(-2deg); margin-bottom: 2rem; }
+.shoe-img { width: 100%; max-width: 500px; filter: drop-shadow(10px 10px 0px var(--red)); }
+.pop { opacity: 0; transform: scale(0.5) rotate(-10deg); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.pop.active { opacity: 1; transform: scale(1) rotate(0); }
+.skate-hero h1.active { transform: scale(1) rotate(-5deg); }
+.polaroid.active { transform: scale(1) rotate(3deg); }
+.classics h2.active { transform: scale(1) rotate(-2deg); }
+.delay-1 { transition-delay: 0.2s; }
+@media(max-width:768px) { .skate-hero h1 { font-size: 3rem; } }
