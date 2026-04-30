@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brands Portfolio — Dhaval</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Barlow', sans-serif; background: #080808; color: #fff; overflow-x: hidden; }
+        .hero { padding: 120px 5% 60px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.07); }
+        .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; letter-spacing: 5px; }
+        .hero p { color: rgba(255,255,255,0.4); margin-top: 1rem; font-size: 1rem; letter-spacing: 3px; }
+        .count { color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; }
+        .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 6px; color: rgba(255,255,255,0.3); text-transform: uppercase; padding: 3rem 5% 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: rgba(255,255,255,0.05); }
+        .card { background: #0d0d0d; padding: 2.5rem 2rem; text-decoration: none; color: white; display: block; transition: all 0.3s; border-bottom: 3px solid transparent; position: relative; overflow: hidden; }
+        .card::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.3s; }
+        .card:hover { transform: translateY(-4px); }
+        .card:hover::before { opacity: 1; }
+        .card-num { font-family: 'Barlow Condensed', sans-serif; font-size: 3rem; font-weight: 900; opacity: 0.06; line-height: 1; margin-bottom: -0.5rem; }
+        .card-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 0.5rem; }
+        .card-desc { font-size: 0.8rem; color: rgba(255,255,255,0.4); letter-spacing: 1px; line-height: 1.5; }
+        .card-arrow { position: absolute; right: 1.5rem; bottom: 1.5rem; font-size: 1.2rem; opacity: 0; transition: all 0.3s; }
+        .card:hover .card-arrow { opacity: 1; transform: translateX(5px); }
+
+        /* Color themes per category */
+        .blue { border-bottom-color: #1c69d4; } .blue::before { background: linear-gradient(135deg, rgba(28,105,212,0.07), transparent); }
+        .red { border-bottom-color: #e60012; } .red::before { background: linear-gradient(135deg, rgba(230,0,18,0.07), transparent); }
+        .gold { border-bottom-color: #c9a84c; } .gold::before { background: linear-gradient(135deg, rgba(201,168,76,0.07), transparent); }
+        .purple { border-bottom-color: #7b2fff; } .purple::before { background: linear-gradient(135deg, rgba(123,47,255,0.07), transparent); }
+        .orange { border-bottom-color: #ff6600; } .orange::before { background: linear-gradient(135deg, rgba(255,102,0,0.07), transparent); }
+        .green { border-bottom-color: #00a651; } .green::before { background: linear-gradient(135deg, rgba(0,166,81,0.07), transparent); }
+        .white { border-bottom-color: #f0f0f0; } .white::before { background: linear-gradient(135deg, rgba(240,240,240,0.05), transparent); }
+        .pink { border-bottom-color: #ff69b4; } .pink::before { background: linear-gradient(135deg, rgba(255,105,180,0.07), transparent); }
+
+        footer { text-align: center; padding: 4rem 5%; border-top: 1px solid rgba(255,255,255,0.05); color: rgba(255,255,255,0.2); font-size: 0.85rem; letter-spacing: 2px; }
+        footer span { color: rgba(255,255,255,0.5); }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>BRANDS <span class="count">42+</span></h1>
+    <p>A PORTFOLIO OF UNIQUE LANDING PAGES — BY DHAVAL</p>
+</div>
+
+<!-- MOTORCYCLES -->
+<div class="section-title">🏍️ Motorcycles — 4 Sites</div>
+<div class="grid">
+    <a class="card blue" href="bmw-g310rr/"><div class="card-num">01</div><div class="card-name">BMW G 310 RR</div><div class="card-desc">Born to Dominate. Track DNA. Street Soul.</div><span class="card-arrow">→</span></a>
+    <a class="card red" href="suzuki-gsx-r1000r/"><div class="card-num">02</div><div class="card-name">Suzuki GSX-R1000R</div><div class="card-desc">The King of Superbikes. MotoGP DNA.</div><span class="card-arrow">→</span></a>
+    <a class="card orange" href="harley-davidson-x440/"><div class="card-num">03</div><div class="card-name">Harley-Davidson X440</div><div class="card-desc">Rebel on the Road. Live to Ride.</div><span class="card-arrow">→</span></a>
+    <a class="card purple" href="suzuki-hayabusa/"><div class="card-num">04</div><div class="card-name">Suzuki Hayabusa 隼</div><div class="card-desc">The Ultimate Sport Bike. 1340cc. Limitless.</div><span class="card-arrow">→</span></a>
+</div>
+
+<!-- LUXURY WATCHES -->
+<div class="section-title">⌚ Luxury Watches — 4 Sites</div>
+<div class="grid">
+    <a class="card green" href="rolex/"><div class="card-num">01</div><div class="card-name">Rolex</div><div class="card-desc">The Crown of Achievement.</div><span class="card-arrow">→</span></a>
+    <a class="card gold" href="patek-philippe/"><div class="card-num">02</div><div class="card-name">Patek Philippe</div><div class="card-desc">Begin Your Own Tradition.</div><span class="card-arrow">→</span></a>
+    <a class="card blue" href="omega/"><div class="card-num">03</div><div class="card-name">Omega</div><div class="card-desc">From the Deep Ocean to Space.</div><span class="card-arrow">→</span></a>
+    <a class="card gold" href="titan/"><div class="card-num">04</div><div class="card-name">Titan</div><div class="card-desc">Crafted for the Moment.</div><span class="card-arrow">→</span></a>
+</div>
+
+<!-- LUXURY & FASHION -->
+<div class="section-title">👜 Luxury & Fashion — 4 Sites</div>
+<div class="grid">
+    <a class="card red" href="cartier/"><div class="card-num">01</div><div class="card-name">Cartier</div><div class="card-desc">The Jeweler of Kings.</div><span class="card-arrow">→</span></a>
+    <a class="card green" href="gucci/"><div class="card-num">02</div><div class="card-name">Gucci</div><div class="card-desc">High-fashion editorial. The Archive.</div><span class="card-arrow">→</span></a>
+    <a class="card gold" href="louis-vuitton/"><div class="card-num">03</div><div class="card-name">Louis Vuitton</div><div class="card-desc">The Spirit of Travel.</div><span class="card-arrow">→</span></a>
+    <a class="card white" href="apple/"><div class="card-num">04</div><div class="card-name">Apple</div><div class="card-desc">Pro. Beyond. Ultra-minimalist tech.</div><span class="card-arrow">→</span></a>
+</div>
+
+<!-- AUTOMOTIVE -->
+<div class="section-title">🚗 Automotive — 4 Sites</div>
+<div class="grid">
+    <a class="card red" href="ferrari/"><div class="card-num">01</div><div class="card-name">Ferrari</div><div class="card-desc">Unleash the Roar. Scuderia red.</div><span class="card-arrow">→</span></a>
+    <a class="card white" href="tesla/"><div class="card-num">02</div><div class="card-name">Tesla</div><div class="card-desc">The Future of Driving. Dark mode.</div><span class="card-arrow">→</span></a>
+    <a class="card white" href="porsche/"><div class="card-num">03</div><div class="card-name">Porsche</div><div class="card-desc">There is No Substitute.</div><span class="card-arrow">→</span></a>
+    <a class="card white" href="bugatti/"><div class="card-num">04</div><div class="card-name">Bugatti</div><div class="card-desc">Incomparable. Ultra-luxury cinematic.</div><span class="card-arrow">→</span></a>
+</div>
+
+<!-- SPORTSWEAR -->
+<div class="section-title">👟 Sportswear — 6 Sites</div>
+<div class="grid">
+    <a class="card white" href="nike/"><div class="card-num">01</div><div class="card-name">Nike</div><div class="card-desc">Just Do It. Neon dark mode.</div><span class="card-arrow">→</span></a>
+    <a class="card white" href="adidas/"><div class="card-num">02</div><div class="card-name">Adidas</div><div class="card-desc">Impossible is Nothing. Brutalist.</div><span class="card-arrow">→</span></a>
+    <a class="card red" href="puma/"><div class="card-num">03</div><div class="card-name">Puma</div><div class="card-desc">Forever Faster. Slanted layout.</div><span class="card-arrow">→</span></a>
+    <a class="card blue" href="skechers/"><div class="card-num">04</div><div class="card-name">Skechers</div><div class="card-desc">Comfort That Performs. Playful.</div><span class="card-arrow">→</span></a>
+    <a class="card red" href="under-armour/"><div class="card-num">05</div><div class="card-name">Under Armour</div><div class="card-desc">The Only Way Is Through.</div><span class="card-arrow">→</span></a>
+    <a class="card white" href="vans/"><div class="card-num">06</div><div class="card-name">Vans</div><div class="card-desc">Off The Wall. Skater culture.</div><span class="card-arrow">→</span></a>
+</div>
+
+<!-- OTHER BRANDS -->
+<div class="section-title">🎯 Other Brands — 3 Sites</div>
+<div class="grid">
+    <a class="card blue" href="red-bull/"><div class="card-num">01</div><div class="card-name">Red Bull</div><div class="card-desc">Gives You Wings. Extreme sports.</div><span class="card-arrow">→</span></a>
+    <a class="card purple" href="sony/"><div class="card-num">02</div><div class="card-name">Sony</div><div class="card-desc">Creativity Out of the Box. Neon cyberpunk.</div><span class="card-arrow">→</span></a>
+</div>
+
+<!-- SINGLE PAGE SITES -->
+<div class="section-title">📄 Single Page Concepts — 17 Sites</div>
+<div class="grid">
+    <a class="card gold" href="01_nova_electric_cars.html"><div class="card-num">01</div><div class="card-name">Nova Electric</div><div class="card-desc">Future EV brand landing page.</div><span class="card-arrow">→</span></a>
+    <a class="card pink" href="02_bloom_skincare.html"><div class="card-num">02</div><div class="card-name">Bloom Skincare</div><div class="card-desc">Premium beauty brand.</div><span class="card-arrow">→</span></a>
+    <a class="card red" href="03_forge_fitness.html"><div class="card-num">03</div><div class="card-name">Forge Fitness</div><div class="card-desc">High-energy gym brand.</div><span class="card-arrow">→</span></a>
+    <a class="card gold" href="04_zenith_watches.html"><div class="card-num">04</div><div class="card-name">Zenith Watches</div><div class="card-desc">Luxury timepiece showcase.</div><span class="card-arrow">→</span></a>
+    <a class="card blue" href="05_byte_analytics.html"><div class="card-num">05</div><div class="card-name">Byte Analytics</div><div class="card-desc">Data & tech company.</div><span class="card-arrow">→</span></a>
+    <a class="card orange" href="06_haven_hotel.html"><div class="card-num">06</div><div class="card-name">Haven Hotel</div><div class="card-desc">Boutique hotel resort.</div><span class="card-arrow">→</span></a>
+    <a class="card red" href="07_feast_food.html"><div class="card-num">07</div><div class="card-name">Feast Food</div><div class="card-desc">Culinary brand restaurant.</div><span class="card-arrow">→</span></a>
+    <a class="card green" href="08_terra_fashion.html"><div class="card-num">08</div><div class="card-name">Terra Fashion</div><div class="card-desc">Earth-conscious fashion label.</div><span class="card-arrow">→</span></a>
+    <a class="card white" href="09_flux_architecture.html"><div class="card-num">09</div><div class="card-name">Flux Architecture</div><div class="card-desc">Modern architectural firm.</div><span class="card-arrow">→</span></a>
+    <a class="card purple" href="10_pulse_music.html"><div class="card-num">10</div><div class="card-name">Pulse Music</div><div class="card-desc">Music & audio streaming.</div><span class="card-arrow">→</span></a>
+    <a class="card gold" href="01_lumiere_candles.html"><div class="card-num">11</div><div class="card-name">Lumière Candles</div><div class="card-desc">Luxury scented candle brand.</div><span class="card-arrow">→</span></a>
+    <a class="card orange" href="02_kohi_coffee.html"><div class="card-num">12</div><div class="card-name">Kohi Coffee</div><div class="card-desc">Artisan coffee brand.</div><span class="card-arrow">→</span></a>
+    <a class="card green" href="03_terraverde_plants.html"><div class="card-num">13</div><div class="card-name">Terraverde Plants</div><div class="card-desc">Botanical plant shop.</div><span class="card-arrow">→</span></a>
+    <a class="card gold" href="04_arcana_jewelry.html"><div class="card-num">14</div><div class="card-name">Arcana Jewelry</div><div class="card-desc">Mystical fine jewelry.</div><span class="card-arrow">→</span></a>
+    <a class="card orange" href="05_flour_and_fire_bakery.html"><div class="card-num">15</div><div class="card-name">Flour & Fire</div><div class="card-desc">Artisan bakery brand.</div><span class="card-arrow">→</span></a>
+    <a class="card pink" href="06_petal_lab_skincare.html"><div class="card-num">16</div><div class="card-name">Petal Lab</div><div class="card-desc">Science-backed skincare.</div><span class="card-arrow">→</span></a>
+    <a class="card purple" href="07_groove_theory_records.html"><div class="card-num">17</div><div class="card-name">Groove Theory</div><div class="card-desc">Indie music record label.</div><span class="card-arrow">→</span></a>
+</div>
+
+<!-- AI SITES -->
+<div class="section-title">🤖 AI & Tech Showcases — 4 Sites</div>
+<div class="grid">
+    <a class="card white" href="claude.html"><div class="card-num">01</div><div class="card-name">Claude AI</div><div class="card-desc">Anthropic AI assistant showcase.</div><span class="card-arrow">→</span></a>
+    <a class="card blue" href="openai.html"><div class="card-num">02</div><div class="card-name">OpenAI</div><div class="card-desc">GPT & DALL·E showcase.</div><span class="card-arrow">→</span></a>
+    <a class="card orange" href="kimi.html"><div class="card-num">03</div><div class="card-name">Kimi AI</div><div class="card-desc">Kimi AI platform overview.</div><span class="card-arrow">→</span></a>
+    <a class="card purple" href="perplexity.html"><div class="card-num">04</div><div class="card-name">Perplexity AI</div><div class="card-desc">AI-powered search engine.</div><span class="card-arrow">→</span></a>
+</div>
+
+<footer>
+    BUILT BY <span>DHAVAL</span> — <span>42+ UNIQUE BRAND WEBSITES</span>
+</footer>
+
+</body>
+</html>
