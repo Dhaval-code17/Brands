@@ -1,0 +1,81 @@
+:root {
+    --bg-white: #ffffff;
+    --text-black: #1a1a1a;
+    --cartier-red: #e3000f;
+    --light-grey: #f9f9f9;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg-white);
+    color: var(--text-black);
+    line-height: 1.6;
+}
+
+h1, h2, h3, .logo, .logo-large { font-family: 'Bodoni Moda', serif; }
+
+/* Navbar */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 5%; background: var(--bg-white);
+    position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #eee;
+}
+.logo { font-size: 2rem; }
+.nav-links a { margin-left: 2rem; color: var(--text-black); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+.nav-links a:hover { color: var(--cartier-red); }
+
+/* Cover */
+.cover-section { height: calc(100vh - 80px); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--light-grey); }
+.cover-image { position: absolute; top: 5%; left: 5%; width: 90%; height: 90%; z-index: 1; }
+.cover-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: contrast(1.1); }
+.zoom-anim { animation: zoomIn 15s infinite alternate; }
+@keyframes zoomIn { from { transform: scale(1); } to { transform: scale(1.05); } }
+
+.cover-title { z-index: 2; text-align: center; background: rgba(255,255,255,0.85); padding: 3rem 4rem; backdrop-filter: blur(5px); }
+.subtitle { color: var(--cartier-red); font-size: 1.2rem; margin-bottom: 1rem; letter-spacing: 3px; }
+.cover-title h1 { font-size: 5rem; letter-spacing: 5px; margin-bottom: 1rem; }
+.desc { max-width: 400px; margin: 0 auto; font-style: italic; font-family: 'Bodoni Moda', serif; }
+
+/* Editorial Section */
+.editorial-section { padding: 120px 5%; }
+.editorial-grid { display: flex; max-width: 1200px; margin: 0 auto; gap: 5rem; align-items: center; }
+.text-col { flex: 1; }
+.text-col h2 { font-size: 3rem; margin-bottom: 1.5rem; letter-spacing: 2px; }
+.text-col p { font-size: 1.1rem; margin-bottom: 2rem; color: #555; }
+.btn-text { text-decoration: none; color: var(--text-black); border-bottom: 1px solid var(--text-black); padding-bottom: 5px; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; transition: all 0.3s; }
+.btn-text:hover { color: var(--cartier-red); border-color: var(--cartier-red); }
+
+.img-col { flex: 1; }
+.img-col img { width: 100%; height: auto; box-shadow: 20px 20px 0px var(--cartier-red); }
+
+/* History Section */
+.history-section { padding: 100px 5%; background: var(--cartier-red); color: var(--bg-white); text-align: center; }
+.history-box { max-width: 800px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.3); padding: 4rem 2rem; }
+.history-box h3 { font-size: 2.5rem; margin-bottom: 2rem; letter-spacing: 2px; }
+.history-box p { font-size: 1.5rem; font-style: italic; font-family: 'Bodoni Moda', serif; margin-bottom: 2rem; }
+.small-text { font-size: 0.9rem !important; font-family: 'Montserrat', sans-serif !important; font-style: normal !important; opacity: 0.8; }
+
+/* Footer */
+.footer { padding: 5rem 5% 2rem; text-align: center; }
+.logo-large { font-size: 4rem; margin-bottom: 2rem; }
+.footer-nav { margin-bottom: 2rem; }
+.footer-nav a { color: #888; text-decoration: none; margin: 0 1.5rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+.footer-nav a:hover { color: var(--text-black); }
+
+/* Animations */
+.fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1s ease forwards; }
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+
+.reveal-left { opacity: 0; transform: translateX(-50px); transition: all 1s ease; }
+.reveal-right { opacity: 0; transform: translateX(50px); transition: all 1s ease; }
+.reveal-up { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
+.active { opacity: 1; transform: translate(0); }
+
+@media (max-width: 768px) {
+    .editorial-grid { flex-direction: column; }
+    .cover-title h1 { font-size: 3rem; }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARTIER - The Jeweler of Kings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">Cartier</div>
+        <div class="nav-links">
+            <a href="#high-jewelry">High Jewelry</a>
+            <a href="#watches">Watches</a>
+            <a href="#maison">La Maison</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="cover-section">
+            <div class="cover-image zoom-anim">
+                <img src="assets/hero.jpg" alt="Cartier Cover">
+            </div>
+            <div class="cover-title">
+                <p class="subtitle fade-in">Nº 1</p>
+                <h1 class="fade-in delay-1">L'ÉLÉGANCE</h1>
+                <p class="desc fade-in delay-2">Elegance is an Attitude. A harmonious blend of boldness and grace.</p>
+            </div>
+        </section>
+
+        <section id="high-jewelry" class="editorial-section">
+            <div class="editorial-grid">
+                <div class="col text-col reveal-left">
+                    <h2>THE PANTHÈRE</h2>
+                    <p>A story of passion, creativity, and exceptional savoir-faire. Transforming the ordinary into the precious. The emblem of the Maison since 1914.</p>
+                    <a href="#" class="btn-text">DISCOVER MORE</a>
+                </div>
+                <div class="col img-col reveal-right">
+                    <img src="assets/product1.jpg" alt="High Jewelry">
+                </div>
+            </div>
+        </section>
+
+        <section id="maison" class="history-section">
+            <div class="history-box reveal-up">
+                <h3>THE JEWELER OF KINGS</h3>
+                <p>"King of Jewelers, Jeweler of Kings" — King Edward VII</p>
+                <p class="small-text">Founded in Paris in 1847 by Louis-François Cartier, the company remained under family control until 1964. Today, it stands as the absolute pinnacle of luxury and refinement.</p>
+            </div>
+        </section>
+    
+        <section id="newsletter" class="newsletter-section" style="padding: 100px 5%; text-align: center; border-top: 1px solid rgba(128,128,128,0.2);">
+            <div class="container reveal-up" style="max-width: 600px; margin: 0 auto;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">JOIN THE EXCLUSIVE</h2>
+                <p style="margin-bottom: 2rem; opacity: 0.8;">Subscribe to receive updates, access to exclusive deals, and more.</p>
+                <form style="display: flex; gap: 1rem; justify-content: center;">
+                    <input type="email" placeholder="Enter your email" style="padding: 1rem; flex: 1; border: 1px solid #ccc; background: transparent; color: inherit;">
+                    <button type="submit" style="padding: 1rem 2rem; background: #333; color: #fff; border: none; cursor: pointer; text-transform: uppercase; font-weight: bold;">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="logo-large">Cartier</div>
+        <div class="footer-nav">
+            <a href="#">Newsletter</a>
+            <a href="#">Boutiques</a>
+            <a href="#">Careers</a>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMEGA - Exact Time for Life</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="gradient-bg"></div>
+
+    <header class="navbar">
+        <div class="logo">OMEGA</div>
+        <nav>
+            <a href="#sea">Seamaster</a>
+            <a href="#space">Speedmaster</a>
+            <a href="#master">Master Chronometer</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="sea" class="sea-section">
+            <div class="floating-bubbles">
+                <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+            </div>
+            <div class="content-wrapper reveal">
+                <h1>FROM THE DEPTHS</h1>
+                <p>Conquering the abyss. The choice of deep-sea explorers and naval forces worldwide.</p>
+                <div class="product-focus">
+                    <img src="assets/product1.jpg" alt="Seamaster" class="float-anim">
+                </div>
+                <button class="btn-outline">Discover Seamaster</button>
+            </div>
+        </section>
+
+        <section id="space" class="space-section">
+            <div class="stars-bg"></div>
+            <div class="content-wrapper reveal">
+                <h1>TO THE MOON</h1>
+                <p>The first watch worn on the lunar surface. A legacy that transcends our world.</p>
+                <div class="product-focus">
+                    <img src="assets/hero.jpg" alt="Speedmaster" class="float-anim delay-1">
+                </div>
+                <button class="btn-outline light">Discover Speedmaster</button>
+            </div>
+        </section>
+
+        <section id="master" class="tech-section">
+            <div class="content-wrapper reveal">
+                <h2>MASTER CHRONOMETER</h2>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h3>Magnetic Resistance</h3>
+                        <p>Withstanding magnetic fields up to 15,000 gauss.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>Co-Axial Escapement</h3>
+                        <p>Reduced friction for greater mechanical efficiency over time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section id="newsletter" class="newsletter-section" style="padding: 100px 5%; text-align: center; border-top: 1px solid rgba(128,128,128,0.2);">
+            <div class="container reveal-up" style="max-width: 600px; margin: 0 auto;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">JOIN THE EXCLUSIVE</h2>
+                <p style="margin-bottom: 2rem; opacity: 0.8;">Subscribe to receive updates, access to exclusive deals, and more.</p>
+                <form style="display: flex; gap: 1rem; justify-content: center;">
+                    <input type="email" placeholder="Enter your email" style="padding: 1rem; flex: 1; border: 1px solid #ccc; background: transparent; color: inherit;">
+                    <button type="submit" style="padding: 1rem 2rem; background: #333; color: #fff; border: none; cursor: pointer; text-transform: uppercase; font-weight: bold;">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="logo">OMEGA</div>
+            <p>&copy; 2026 OMEGA SA. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUGATTI - Incomparable</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">BUGATTI</div>
+        <div class="menu-btn">
+            <span></span><span></span>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-bg">
+                <img src="assets/hero.jpg" alt="Bugatti Hero">
+                <div class="overlay"></div>
+            </div>
+            <div class="hero-content">
+                <p class="fade-in">MOLSHEIM, FRANCE</p>
+                <h1 class="fade-in delay-1">IF IT IS COMPARABLE<br>IT IS NO LONGER BUGATTI</h1>
+                <button class="btn-ghost fade-in delay-2">DISCOVER LA VOITURE NOIRE</button>
+            </div>
+            <div class="scroll-indicator fade-in delay-3">
+                <span>SCROLL</span>
+                <div class="line"></div>
+            </div>
+        </section>
+
+        <section id="specs" class="specs-section">
+            <div class="specs-container">
+                <div class="spec-block reveal-up">
+                    <h3>01</h3>
+                    <h2>ENGINEERING</h2>
+                    <p>8.0L W16 Quad-Turbocharged Engine. Producing 1600 HP of unadulterated power.</p>
+                </div>
+                <div class="spec-img-wrapper reveal-up delay-1">
+                    <img src="assets/product1.jpg" alt="Engine Details">
+                    <div class="data-overlay">
+                        <span>RPM: 7100</span>
+                        <span>TORQUE: 1600 NM</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="horizontal" class="horizontal-scroll-section">
+            <div class="horizontal-container">
+                <div class="slide">
+                    <h2>THE CHIRON</h2>
+                    <p>A masterpiece of form and function.</p>
+                </div>
+                <div class="slide">
+                    <img src="assets/hero.jpg" alt="Chiron Front">
+                </div>
+                <div class="slide">
+                    <h2>AERODYNAMICS</h2>
+                    <p>Sculpted by the wind to achieve 400+ km/h.</p>
+                </div>
+                <div class="slide">
+                    <img src="assets/product1.jpg" alt="Aerodynamics">
+                </div>
+            </div>
+        </section>
+    
+        <section id="newsletter" class="newsletter-section" style="padding: 100px 5%; text-align: center; border-top: 1px solid rgba(128,128,128,0.2);">
+            <div class="container reveal-up" style="max-width: 600px; margin: 0 auto;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">JOIN THE EXCLUSIVE</h2>
+                <p style="margin-bottom: 2rem; opacity: 0.8;">Subscribe to receive updates, access to exclusive deals, and more.</p>
+                <form style="display: flex; gap: 1rem; justify-content: center;">
+                    <input type="email" placeholder="Enter your email" style="padding: 1rem; flex: 1; border: 1px solid #ccc; background: transparent; color: inherit;">
+                    <button type="submit" style="padding: 1rem 2rem; background: #333; color: #fff; border: none; cursor: pointer; text-transform: uppercase; font-weight: bold;">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">BUGATTI</div>
+            <nav>
+                <a href="#">MODELS</a>
+                <a href="#">BRAND</a>
+                <a href="#">OWNERSHIP</a>
+            </nav>
+            <p>&copy; 2026 BUGATTI AUTOMOBILES S.A.S.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
